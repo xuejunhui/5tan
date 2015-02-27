@@ -1,0 +1,50 @@
+﻿@model VisaModel
+<script type="text/javascript" charset="utf-8" src="/UMEditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/UMEditor/ueditor.all.min.js"></script>
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/3")'>内容管理</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Content/@Model.VType")'>@(Model.VType.Equals("Visa") ? "签证" : "票务预定")管理</a></li>
+        <li><a href="javascript:void(0);">@(Model.AutoKey == 0 ? "新增" : "编辑")@(Model.VType.Equals("Visa") ? "签证" : "票务预定")</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div class="formtitle"><span>@(Model.AutoKey == 0 ? "新增" : "编辑")@(Model.VType.Equals("Visa") ? "签证" : "票务预定")</span></div>
+    @if (Model.Msg != null)
+    {  
+        <div class="formtext" id="msgInfo">@Model.Msg.GetMessageInfo()</div>
+    }
+    @using (Html.BeginForm("EditVisa", "Content", new { }, FormMethod.Post))
+    {
+        @Html.HiddenFor(s => s.AutoKey)
+        @Html.HiddenFor(s => s.GUID)
+        @Html.HiddenFor(s => s.VType)
+        <ul class="forminfo">
+            <li><label>@(Model.VType.Equals("Visa") ? "签证" : "票务")名称<b>*</b></label>@Html.TextBoxFor(s => s.VName, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.VName)</i></li>
+            @if (Model.VType.Equals("Visa"))
+            {
+                <li><label>签证分类<b>*</b></label><div class="dropdownbox">@Html.Action("DropDownBox", "Ajax", new { parentid = (int)DropDownState.VisaCategory, value = Model.CategoryDropDownNav.ToEmptyTrimString(), dname = "CategoryID" })</div><i>@Html.ValidationMessageFor(s => s.CategoryID)</i></li>
+            }
+            else
+            { 
+                <li><label>票务分类<b>*</b></label><div class="dropdownbox">@Html.Action("DropDownBox", "Ajax", new { parentid = (int)DropDownState.TicketCategory, value = Model.CategoryDropDownNav.ToEmptyTrimString(), dname = "CategoryID" })</div><i>@Html.ValidationMessageFor(s => s.CategoryID)</i></li>
+            }
+            <li><label>@(Model.VType.Equals("Visa") ? "签证" : "票务")价格<b>*</b></label>@Html.TextBoxFor(s => s.Price, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Price)</i></li>
+            <li><label>关键词</label>@Html.TextBoxFor(s => s.KeyWord, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.KeyWord)</i></li>
+            <li><label>描述</label>@Html.TextAreaFor(s => s.Description, new { @class = "textinput" })<i>@Html.ValidationMessageFor(s => s.Description)</i></li>
+            <li><label>内容<b>*</b></label>@Html.TextAreaFor(s => s.VContent, new { @class = "textedit", id = "VContent" })<i>@Html.ValidationMessageFor(s => s.VContent)</i></li>
+            <li><label>是否审核<b>*</b></label><cite>@Html.RadioButtonFor(s => s.Enable, true) 是 @Html.RadioButtonFor(s => s.Enable, false) 否</cite></li>
+            <li><label>&nbsp;</label>
+                <input name="" type="submit" class="btn" value="保存@(Model.VType.Equals("Visa") ? "签证" : "票务预定")信息"/>
+                <input type="button" class="btn" value="返回列表" onclick='showJumpBox("/Content/@(Model.VType)")'/>
+            </li>
+        </ul>
+    }
+</div>
+<script type="text/javascript">
+    UE.getEditor('VContent', {
+        serverUrl: "/UserUpload/UploadServer/@(Model.GUID)_@(UploadPage.Visa)"
+    });
+</script>
+   

@@ -1,0 +1,25 @@
+﻿@model ContentViewModel
+<ul class="cl c_category">
+    <li class="right_title">
+        @Model.CurrentHeard.Shorttitle
+    </li>
+    @if (Model.IsWebsiteCase || Model.IsNews)
+    { 
+        foreach (var item in Model.CategoryList)
+        { 
+            <li @(item.AutoKey == Model.CurrentCategory.AutoKey ? "class=hover" : "")><a href="@URLUtility.NetWordCategoryUrl(Model.CurrentHeard.AutoKey, Model.CurrentHeard.SEOURL, item.AutoKey, item.SEOURL)">@item.CategoryName</a></li>
+        }
+    }else
+    {
+        int gautokey = Model is GuideViewModel ? ((GuideViewModel)Model).Guide.AutoKey : 0;
+        <li @(gautokey == 0? "class=hover" : "")><a href="@URLUtility.NetWrokContentUrl(Model.CurrentHeard.AutoKey, Model.CurrentHeard.SEOURL)">@Model.CurrentHeard.Title</a></li>
+        foreach (var item in Model.Guides)
+        { 
+            
+            <li @(item.AutoKey == gautokey? "class=hover" : "")><a href="@URLUtility.NetWordGuideUrl(Model.CurrentHeard.AutoKey, Model.CurrentHeard.SEOURL, item.AutoKey)">@item.GuideName</a></li>
+        }
+    }
+
+</ul>
+            
+@Html.Partial("_RightContact")

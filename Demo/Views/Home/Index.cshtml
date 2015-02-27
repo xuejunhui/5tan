@@ -1,0 +1,435 @@
+﻿@model IndexModel
+@{
+    ViewBag.Title = "带你去旅行";
+    
+}
+@section Css{
+    <link href="@Url.Content("~/Content/Index.css")" rel="stylesheet" type="text/css" />
+}
+@section Js{
+    <script type="text/javascript">
+        jQuery(".focus_box").slide({ mainCell: ".bd ul", effect: "fade", easing: "linear", autoPlay: true, delayTime: 400, interTime: 3000 });
+        jQuery(".ranking").slide({ titCell: ".hd li", mainCell: ".bd", delayTime: 0 });
+        jQuery('.item').hover(function () {
+            jQuery(".description", this).stop().animate({ top: '0' }, { queue: false, duration: 160 });
+        }, function () {
+            var topvalue = "0";
+            var c = jQuery(this).parent().attr("class");
+            if (c == "pic-large" || c == "pic-minimal" || c == "pic-minimal mr10 minx" || c == "pic-small")
+                topvalue = "228";
+            else
+                topvalue = "90";
+            jQuery(".description", this).stop().animate({ top: topvalue }, { queue: false, duration: 160 });
+        });
+    </script>
+}
+
+@Html.Partial("_AdsContent",AdsPos.MainTopScroll)
+@Html.Partial("_AdsContent",AdsPos.AdsMainSlide)
+
+<div class="jeavi_con cl">
+    <div class="left-con cl">
+        <div class="photo-part mt20 cl">
+            <!--境外旅途推荐-->
+            <div class="portal-hd">
+                <h2>境外旅游推荐</h2>
+                <a class="more" href="@URLUtility.CategoryUrl(0, "Overseas")">更多</a>
+            </div>
+            @Html.Partial("_RecommendList", "港澳台及境外")
+
+            @*@Html.Partial("_AdsContent",AdsPos.AdsMainBanner1)*@
+            <div class="mb20">
+            <div id="l-ad" class="area">
+            <div class="portal_block_summary">
+            <script type="text/javascript">
+                            var sogou_ad_id = 396815;
+                            var sogou_ad_height = 90;
+                            var sogou_ad_width = 728;
+            </script>
+            <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+            </div>
+            </div>
+            </div>
+            <!--国内旅游-->
+            <div class="portal-hd">
+                <h2>国内旅游推荐</h2>
+                <a class="more" href="@URLUtility.CategoryUrl(0, "Domestic")">更多</a>
+            </div>
+            @Html.Partial("_RecommendList","国内")
+
+           @* @Html.Partial("_AdsContent",AdsPos.AdsMainBanner2)*@
+             <div class="mb20">
+            <div id="l-ad" class="area">
+            <div class="portal_block_summary">
+            <script type="text/javascript">
+                var sogou_ad_id = 396817;
+                var sogou_ad_height = 90;
+                var sogou_ad_width = 728;
+            </script>
+            <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+                </div>
+            </div>
+            </div>
+             <!--省内旅游-->
+            <div class="portal-hd">
+                <h2>省内旅游推荐</h2>
+                <a class="more" href="@URLUtility.CategoryUrl(0, "Province")">更多</a>
+            </div>
+            @Html.Partial("_RecommendList", "省内")
+
+            <div class="portal-hd">
+                <h2>热门景点</h2>
+                <a class="more" href="@URLUtility.GuideCenterUrl()">更多</a>
+            </div>
+            <div class="columns cl">
+                <div class="photo-small">
+                    <div id="photo-small-l" class="area">
+                        <ul>
+                        @for (int i = 0; i < Model.GuidesTopList.Count();i++ )
+                        {
+                            if (i % 2 == 0)
+                            {
+                                var item = Model.GuidesTopList[i];
+                            <li>
+                                <div class="photo-pic">
+                                <a title="@item.GuideName" href="@URLUtility.GuideDetailUrl(item.AutoKey)">
+                                    <img width="100" height="75" alt="@item.GuideName" src="@item["ImgUrl"].ToEmptyTrimString().GetSmallUrl()"/>
+                                </a>
+                                </div>
+                                <h3>
+                                <a class="link" title="@item.GuideName" href="@URLUtility.GuideDetailUrl(item.AutoKey)">@item.GuideName</a>
+                                </h3>
+                                <p title="@item.Description">@item.Description.DisplayByMaxLength(25)</p>
+                            </li>
+                            }
+                        }
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="photo-small mr30">
+                    <div id="photo-small-l" class="area">
+                        <ul>
+                        @for (int i = 0; i < Model.GuidesTopList.Count();i++ )
+                        {
+                            if (i % 2 == 1)
+                            {
+                                var item = Model.GuidesTopList[i];
+                            <li>
+                                <div class="photo-pic">
+                                <a title="@item.GuideName" href="@URLUtility.GuideDetailUrl(item.AutoKey)">
+                                    <img width="100" height="75" alt="@item.GuideName" src="@item["ImgUrl"].ToEmptyTrimString().GetSmallUrl()"/>
+                                </a>
+                                </div>
+                                <h3>
+                                <a class="link" title="@item.GuideName" href="@URLUtility.GuideDetailUrl(item.AutoKey)">@item.GuideName</a>
+                                </h3>
+                                <p title="@item.Description">@item.Description.DisplayByMaxLength(25)</p>
+                            </li>
+                            }
+                        }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="right-con cl">
+        @Html.Partial("_AdsContent",AdsPos.AdsMainContact)
+
+        <!--拼团-->
+        <div class="ranking mt20">
+            <div class="hd">
+                <div id="ranking-t" class="area">
+                    <ul>
+                        <li class="on">散客拼团</li>
+                        <li>独立组团</li>
+                        <li >票务预订</li>
+                        </ul>
+                </div>
+            </div>
+            <div class="bd">
+                <ul class="top10">
+                    @for (int i = 0; i < Model.FitFightGroups.Count(); i++)
+                    {
+                        var item = Model.FitFightGroups[i];
+                        <li @(i < 3 ? "class=top" : "")>
+                            <span class="price">￥@item.Price.ToPrice()</span>
+                            <span class="num">@(i + 1)</span>
+                            <a href="@URLUtility.SummerDetailUrl(item.AutoKey,item.SEOURL)" title="@item.Title" target="_blank">@item.Shorttitle</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="top10" style="display:none;">
+                    @for (int i = 0; i < Model.IndependentGroups.Count(); i++)
+                    {
+                        var item = Model.IndependentGroups[i];
+                        <li @(i < 3 ? "class=top" : "")>
+                            <span class="price">￥@item.Price.ToPrice()</span>
+                            <span class="num">@(i + 1)</span>
+                            <a href="@URLUtility.SummerDetailUrl(item.AutoKey,item.SEOURL)" title="@item.Title" target="_blank">@item.Shorttitle</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="top10" style="display:none;">
+                    @for (int i = 0; i < Model.TicketTopList.Count(); i++)
+                    {
+                        var item = Model.TicketTopList[i];
+                        <li @(i < 3 ? "class=top" : "")>
+                            <span class="price">￥@item.Price.ToPrice()</span>
+                            <span class="num">@(i + 1)</span>
+                            <a href="@URLUtility.TicketDetailUrl(item.AutoKey)" title="@item.VName" target="_blank">@item.VName</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+
+        <!--签证代办-->
+        <div class="mt20">
+            <div class="portal-hd">
+                <div id="new-visa-t" class="area">
+                    <h2>签证代办</h2>
+                    <a class="more" href="@URLUtility.VisaCenterUrl()">更多</a>
+                </div>
+            </div>
+            <div class="bd">
+                <ul class="top10">
+                     @for (int i = 0; i < Model.VisaTopList.Count(); i++)
+                     {
+                         var item = Model.VisaTopList[i];
+                        <li>
+                            <span class="price">￥@item.Price.ToPrice()</span>
+                            <a href="@URLUtility.TicketDetailUrl(item.AutoKey)" title="@item.VName" target="_blank">@item.VName</a>
+                        </li>
+                        
+                     }
+                   
+                </ul>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+
+        <!--旅游攻略-->
+        <div class="new-article">
+            <div class="portal-hd">
+                <div id="new-article-t" class="area">
+                    <h2>旅游攻略</h2>
+                    <a class="more" href="@URLUtility.RaiderCenterUrl()">更多</a>
+                </div>
+            </div>
+            <div class="bd">
+                <div id="new-article-c" class="area">
+                    <ul>
+                        @foreach (var item in Model.RaidersNewList)
+                        { 
+                        <li>
+                            <h3>
+                                <a class="link" target="_blank" title="@item.SC_Name" href="@URLUtility.RaiderDetailUrl(item.AutoKey,item.SEOURL)">@item.SC_Name</a>
+                            </h3>
+                            <p>
+                                <i class="quote"></i>
+                                @item.Description.DisplayByMaxLength(25)
+                            </p>
+                        </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="jeavi_con cl">
+    <div class="all-pic">
+        <div class="portal-hd">
+            <div id="all-pic-t" class="area">
+                <h2>旅游风景集</h2>
+                <a class="more" href="#">更多</a>
+            </div>
+        </div>
+
+        <div class="all-pic-l">
+            <ul class="pic-large">
+                <li class="item c1">
+                    <div class="pic">
+                        <img width="596" height="270" alt="我背着我的相机，走过大大小小13个国家，近50个城镇" src="/Upload/Img/img1.jpg"/>
+                    </div>
+                    <div class="description topbg" style="top: 228px;">
+                    <div class="tit">
+                        <div class="time">2013-11-11</div>
+                            <h4>我背着我的相机，走过大大小小13个国家，近</h4>
+                            <p>2013年3月-8月，我以博士生（建筑学专业）访问学者的身份前往欧洲某高校交流，在这半年的时间里，我背着我的相机，走过大大小小13个国家，近50个城镇。从前，只有在教科书</p>
+                        </div>
+                    </div>
+                    <a title="我背着我的相机，走过大大小小13个国家，近50个城镇" target="_blank" href="#"></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="all-pic-r">
+            <ul class="pic-minimal mr10">
+                <li class="item cl">
+                    <div class="pic">
+                        <img width="192" height="130" alt="我背着我的相机，走过大大小小13个国家，近50个城镇" src="/Upload/Img/img3.jpg"/>
+                    </div>
+                    <div class="description topbg" style="top: 90px;">
+                    <div class="tit">
+                        <div class="time">2013-11-11</div>
+                            <h4>我背着我的相机</h4>
+                            <p>2013年3月-8月，我以博士生（建筑学专业）访问学者的身份前往欧洲某高校交流，在这半年的时间里，我背着我的相机，走过大大小小13个国家，近50个城镇。从前，只有在教科书</p>
+                        </div>
+                    </div>
+                    <a title="我背着我的相机，走过大大小小13个国家，近50个城镇" target="_blank" href="#"></a>
+                </li>
+                <li class="item cl">
+                    <div class="pic">
+                        <img width="192" height="130" alt="我背着我的相机，走过大大小小13个国家，近50个城镇" src="/Upload/Img/img3.jpg"/>
+                    </div>
+                    <div class="description topbg" style="top: 90px;">
+                    <div class="tit">
+                        <div class="time">2013-11-11</div>
+                            <h4>我背着我的相机</h4>
+                            <p>2013年3月-8月，我以博士生（建筑学专业）访问学者的身份前往欧洲某高校交流，在这半年的时间里，我背着我的相机，走过大大小小13个国家，近50个城镇。从前，只有在教科书</p>
+                        </div>
+                    </div>
+                    <a title="我背着我的相机，走过大大小小13个国家，近50个城镇" target="_blank" href="#"></a>
+                </li>
+            </ul>
+            <ul class="pic-minimal">
+                 <li class="item cl">
+                    <div class="pic">
+                        <img width="192" height="270" alt="我背着我的相机，走过大大小小13个国家，近50个城镇" src="/Upload/Img/img4.jpg"/>
+                    </div>
+                    <div class="description topbg" style="top: 228px;">
+                    <div class="tit">
+                        <div class="time">2013-11-11</div>
+                            <h4>我背着我的相机</h4>
+                            <p>2013年3月-8月，我以博士生（建筑学专业）访问学者的身份前往欧洲某高校交流，在这半年的时间里，我背着我的相机，走过大大小小13个国家，近50个城镇。从前，只有在教科书</p>
+                        </div>
+                    </div>
+                    <a title="我背着我的相机，走过大大小小13个国家，近50个城镇" target="_blank" href="#"></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="all-pic-l">
+            <ul class="pic-minimal mr10 minx">
+                <li class="item cl">
+                    <div class="pic">
+                        <img width="192" height="270" alt="我背着我的相机，走过大大小小13个国家，近50个城镇" src="/Upload/Img/img4.jpg"/>
+                    </div>
+                    <div class="description topbg" style="top: 228px;">
+                    <div class="tit">
+                        <div class="time">2013-11-11</div>
+                            <h4>我背着我的相机</h4>
+                            <p>2013年3月-8月，我以博士生（建筑学专业）访问学者的身份前往欧洲某高校交流，在这半年的时间里，我背着我的相机，走过大大小小13个国家，近50个城镇。从前，只有在教科书</p>
+                        </div>
+                    </div>
+                    <a title="我背着我的相机，走过大大小小13个国家，近50个城镇" target="_blank" href="#"></a>
+                </li>
+            </ul>
+            <ul class="pic-minimal mr10">
+                <li class="item cl">
+                    <div class="pic">
+                        <img width="192" height="130" alt="我背着我的相机，走过大大小小13个国家，近50个城镇" src="/Upload/Img/img3.jpg"/>
+                    </div>
+                    <div class="description topbg" style="top: 90px;">
+                    <div class="tit">
+                        <div class="time">2013-11-11</div>
+                            <h4>我背着我的相机</h4>
+                            <p>2013年3月-8月，我以博士生（建筑学专业）访问学者的身份前往欧洲某高校交流，在这半年的时间里，我背着我的相机，走过大大小小13个国家，近50个城镇。从前，只有在教科书</p>
+                        </div>
+                    </div>
+                    <a title="我背着我的相机，走过大大小小13个国家，近50个城镇" target="_blank" href="#"></a>
+                </li>
+                <li class="item cl">
+                    <div class="pic">
+                        <img width="192" height="130" alt="我背着我的相机，走过大大小小13个国家，近50个城镇" src="/Upload/Img/img3.jpg"/>
+                    </div>
+                    <div class="description topbg" style="top: 90px;">
+                    <div class="tit">
+                        <div class="time">2013-11-11</div>
+                            <h4>我背着我的相机</h4>
+                            <p>2013年3月-8月，我以博士生（建筑学专业）访问学者的身份前往欧洲某高校交流，在这半年的时间里，我背着我的相机，走过大大小小13个国家，近50个城镇。从前，只有在教科书</p>
+                        </div>
+                    </div>
+                    <a title="我背着我的相机，走过大大小小13个国家，近50个城镇" target="_blank" href="#"></a>
+                </li>
+            </ul>
+
+            <ul class="pic-minimal mi">
+                <li class="item cl">
+                    <div class="pic">
+                        <img width="192" height="130" alt="我背着我的相机，走过大大小小13个国家，近50个城镇" src="/Upload/Img/img3.jpg"/>
+                    </div>
+                    <div class="description topbg" style="top: 90px;">
+                    <div class="tit">
+                        <div class="time">2013-11-11</div>
+                            <h4>我背着我的相机</h4>
+                            <p>2013年3月-8月，我以博士生（建筑学专业）访问学者的身份前往欧洲某高校交流，在这半年的时间里，我背着我的相机，走过大大小小13个国家，近50个城镇。从前，只有在教科书</p>
+                        </div>
+                    </div>
+                    <a title="我背着我的相机，走过大大小小13个国家，近50个城镇" target="_blank" href="#"></a>
+                </li>
+                <li class="item cl">
+                    <div class="pic">
+                        <img width="192" height="130" alt="我背着我的相机，走过大大小小13个国家，近50个城镇" src="/Upload/Img/img3.jpg"/>
+                    </div>
+                    <div class="description topbg" style="top: 90px;">
+                    <div class="tit">
+                        <div class="time">2013-11-11</div>
+                            <h4>我背着我的相机</h4>
+                            <p>2013年3月-8月，我以博士生（建筑学专业）访问学者的身份前往欧洲某高校交流，在这半年的时间里，我背着我的相机，走过大大小小13个国家，近50个城镇。从前，只有在教科书</p>
+                        </div>
+                    </div>
+                    <a title="我背着我的相机，走过大大小小13个国家，近50个城镇" target="_blank" href="#"></a>
+                </li>
+            </ul>
+
+            
+        </div>
+
+        <div class="all-pic-r">
+            <ul class="pic-small">
+                    <li class="item cl">
+                    <div class="pic">
+                        <img width="394" height="270" alt="我背着我的相机，走过大大小小13个国家，近50个城镇" src="/Upload/Img/img5.jpg"/>
+                    </div>
+                    <div class="description topbg" style="top: 228px;">
+                    <div class="tit">
+                        <div class="time">2013-11-11</div>
+                            <h4>我背着我的相机</h4>
+                            <p>2013年3月-8月，我以博士生（建筑学专业）访问学者的身份前往欧洲某高校交流，在这半年的时间里，我背着我的相机，走过大大小小13个国家，近50个城镇。从前，只有在教科书</p>
+                        </div>
+                    </div>
+                    <a title="我背着我的相机，走过大大小小13个国家，近50个城镇" target="_blank" href="#"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>*@
+
+<div class="jeavi_con cl">
+    <div class="portal-hd">
+        <div id="all-pic-t" class="area">
+            <h2>友情链接</h2>
+            <a class="more" href="@URLUtility.ApplicationFriends()">申请友链</a>
+        </div>
+    </div>
+    <div class="index_link">
+        <div id="index_link" class="area">
+            <ul class="cl">
+               
+                    @foreach (var item in Model.FriendLinks)
+                    { 
+                        <li>
+                            <a target="_blank" href="@item.LinkUrl.ToLink()" title="@item.LinkName">@item.LinkName</a>
+                        </li>
+                    }
+                
+            </ul>
+        </div>
+    </div>
+</div>

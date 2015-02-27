@@ -1,0 +1,78 @@
+﻿@model AdsConfigModel
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/1")'>网站设置</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/Ads")'>广告位列表</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/AdsManage/@Model.Sys_Type"?webname=@Model.WebName.ToString())'>@(Model.Sys_Type.ToAdsPos().GetAdsPosName())</a></li>
+        <li><a href="javascript:void(0);">@(Model.AutoKey == 0 ? "新增广告" : "编辑广告")</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div class="formtitle"><span>@(Model.AutoKey == 0 ? "新增广告" : "编辑广告")</span></div>
+    @if (Model.Msg != null)
+    {  
+        <div class="formtext" id="msgInfo">@Model.Msg.GetMessageInfo()</div>
+    }
+     @using (Html.BeginForm("EditAds", "Manage", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+     {
+        <ul class="forminfo">
+            <li>
+                <label>广告名称</label>@Html.HiddenFor(s => s.AutoKey)@Html.TextBoxFor(s => s.Sys_Value.LinkName, new { @class = "dfinput" })
+                <i>@Html.ValidationMessageFor(s => s.Sys_Value.LinkName)</i>
+            </li>
+            @if (Model.Sys_Value.AdsType == AdsType.Slide || Model.Sys_Value.AdsType == AdsType.Image)
+            { 
+                <li>
+                    <label>广告链接</label>@Html.TextBoxFor(s => s.Sys_Value.Link, new { @class = "dfinput" })
+                    <i>@Html.ValidationMessageFor(s => s.Sys_Value.Link)</i>
+                </li>
+                if (Model.Sys_Value.AdsType == AdsType.Slide)
+                {
+                    <li>
+                        <label>广告描述</label>@Html.TextAreaFor(s => s.Sys_Value.LinkDesc, new { @class = "textinput" })
+                        <i>@Html.ValidationMessageFor(s => s.Sys_Value.LinkDesc)</i>
+                    </li>
+                }
+                if (!String.IsNullOrEmpty(Model.Sys_Value.LinkContent))
+                { 
+                <li>
+                    <label>广告图片</label>
+                    <img src="@Model.Sys_Value.LinkContent" style="max-height:400px;max-width:800px;"/><br/>
+                    @Html.HiddenFor(s => s.Sys_Value.LinkContent)
+                </li>
+                <li><label>&nbsp;</label><input type="file" name="upImg"/></li>
+                }
+                else
+                {
+                <li>
+                    <label>广告图片</label>
+                    <input type="file" name="upImg"/>
+                </li>
+                }
+
+            }
+            else if (Model.Sys_Value.AdsType == AdsType.Link)
+            {
+                <li>
+                    <label>广告链接</label>@Html.TextBoxFor(s => s.Sys_Value.Link, new { @class = "dfinput" })
+                    <i>@Html.ValidationMessageFor(s => s.Sys_Value.Link)</i>
+                </li>
+                 <li>
+                    <label>链接文字</label>@Html.TextBoxFor(s => s.Sys_Value.LinkContent, new { @class = "dfinput" })
+                    <i>@Html.ValidationMessageFor(s => s.Sys_Value.LinkContent)</i>
+                </li>
+            }
+            else
+            { 
+                <li><label>网站描述</label>@Html.TextAreaFor(s => s.Sys_Value.LinkContent, new { @class = "textinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.LinkContent)</i></li>
+            }
+            <li><label>&nbsp;</label>
+                @Html.HiddenFor(s => s.Sys_Type)
+                @Html.HiddenFor(s => s.Sys_Value.AdsType)
+                @Html.HiddenFor(s => s.WebName)
+                <input name="" type="submit" class="btn" value="保存广告内容"/>
+            </li>
+        </ul>
+     }
+</div>

@@ -1,0 +1,25 @@
+﻿<div class="float0831">
+    <div class="floatl">
+        <a id="afloattools_show" class="btnopen" title="查看在线客服"
+        onclick="javascript:jQuery('#divfloattoolsview').animate({width: 'show', opacity: 'show'}, 'normal',function(){ jQuery('#divfloattoolsview').show(); });jQuery('#afloattools_show').attr('style','display:none');jQuery('#afloattools_hide').attr('style','display:block');" 
+        href="javascript:void(0);">展开</a> 
+        <a style="display: none" id="afloattools_hide" class="btnctn" title="关闭在线客服"
+        onclick="javascript:jQuery('#divfloattoolsview').animate({width: 'hide', opacity: 'hide'}, 'normal',function(){ jQuery('#divfloattoolsview').hide(); });jQuery('#afloattools_show').attr('style','display:block');jQuery('#afloattools_hide').attr('style','display:none');" 
+        href="javascript:void(0);">收缩</a>
+    </div>
+    <div id="divfloattoolsview" class="floatr" style="display: none">
+        <div class="tp"></div>
+        <div class="cn">
+          <ul>
+            <li class="top"><h3 class="titzx">QQ咨询</h3></li>
+            <li><span class="icozx">在线咨询</span> </li>
+            <li><a target="_blank" class="icotc" href="http://wpa.qq.com/msgrd?v=3&uin=@ConfigBLL.CurrentSysConfigInfo.Sys_Value.QQ&site=qq&menu=yes">向小姐</a> </li>
+          </ul>
+          <ul>
+            <li><h3 class="titdh">电话咨询</h3></li>
+            <li><span class="icotl">@ConfigBLL.CurrentSysConfigInfo.Sys_Value.Telephone</span> </li>
+            <li><span class="icotl">@ConfigBLL.CurrentSysConfigInfo.Sys_Value.Phone</span> </li>
+          </ul>
+        </div>
+  </div>
+</div>

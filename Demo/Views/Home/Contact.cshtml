@@ -1,0 +1,50 @@
+﻿@model ContactModel
+@{
+    ViewBag.Title = Model.CurrentContact.SC_Name;
+    ViewBag.Keywords = Model.CurrentContact.KeyWord;
+    ViewBag.Description = Model.CurrentContact.Description;
+}
+@section Css{
+    <link href="@Url.Content("~/Content/GuideDetail.css")" rel="stylesheet" type="text/css" />
+}
+<div  id="wp" class="wp j_wp">
+    <div id="pt" class="bm cl">
+        <div class="z">
+            <a class="nvhm" title="网站首页" href="/">@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName</a>
+            <em>›</em>
+            <a href="@URLUtility.ContactUrl(Model.CurrentContact.AutoKey,Model.CurrentContact.SEOURL)">@Model.CurrentContact.SC_Name</a>
+        </div>
+    </div>
+    <div id="ct" class="ct2 wp cl">
+        <div class="mn animated fadeInUp">
+            <div class="h hm">
+                <h1 class="ph">@Model.CurrentContact.SC_Name</h1>
+             </div>
+             <div id="diysummarytop" class="area"></div>
+             <div class="d">
+                @Html.Raw(Model.CurrentContact.SC_Content)
+            </div>
+        </div>
+        <div class="sd pph">
+            <div class="mt20">
+                <div class="portal-hd">
+                    <div id="new-visa-t" class="area">
+                        <h2>关于我们</h2>
+                    </div>
+                </div>
+                <div class="bd">
+                    <ul class="top10">
+                        @foreach (var item in Model.RelatedContact)
+                        { 
+                            <li>
+                                <a href="@URLUtility.ContactUrl(item.AutoKey,item.SEOURL)" title="@item.SC_Name" >@item.SC_Name</a>
+                            </li>
+                        }
+                    </ul>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+            @Html.Partial("_AdsContent", AdsPos.AdsMainContact)
+        </div>
+    </div>
+</div>

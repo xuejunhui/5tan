@@ -1,0 +1,80 @@
+﻿@model List<Sys_ConfigTB>
+@{
+    Boolean IsImg = (ViewBag.AdsPos as String).GetAdsType() == AdsType.Image || (ViewBag.AdsPos as String).GetAdsType() == AdsType.Slide;
+    String webname = ViewBag.WebName.ToString();
+}
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/1")'>网站设置</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/Ads@(webname.Equals("Demo", StringComparison.OrdinalIgnoreCase) ? "" : webname)")'>广告位列表</a></li>
+        <li><a href="javascript:void(0);" >@(ViewBag.PosName)</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div id="usual1" class="usual"> 
+        <div class="tools">
+            <ul class="toolbar">
+                <li id="BulkDelete" data-value="DelAdsInfo"><span><img src="/content/account/t03.png" /></span>批量刪除</li>
+                <li onclick='showJumpBox("/Manage/EditAds?autokey=0&adspos=@ViewBag.AdsPos&webname=@webname")'><span><img src="/content/account/t01.png" /></span>新增广告內容</li>
+            </ul>
+
+        </div>
+        <table class="imgtable">
+    	    <thead>
+    	        <tr>
+                    <th width="50"><input id="cball" type="checkbox" /></th>
+                    
+                    @if (IsImg)
+                    { 
+                        <th>广告图片</th>
+                        <th>广告标题</th>
+                    }
+                    else
+                    { 
+                        <th>广告标题</th>
+                        <th>广告内容</th>
+                    }
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        AdsConfigXml ads = item.Sys_Value.XmlDeserialize<AdsConfigXml>(System.Text.Encoding.UTF8);
+                    <tr>
+                        <td><input name="cbno" type="checkbox" value="@item.AutoKey" /></td>
+                        @if (IsImg)
+                        { 
+                            <td><img src="@ads.LinkContent.GetSmallUrl()" alt=""/></td>
+                            <td>
+                                <a href="@ads.Link.ToLink()" target="_blank">@ads.LinkName</a>
+                             </td>
+                        }
+                        else
+                        { 
+                            <td>@ads.LinkName</td>
+                            <td>
+                                @if(ads.Link.IsNullOrEmpty())
+                                {
+                                   @: @ads.LinkContent.DisplayByMaxLength(30)
+                                }
+                                else
+                                {
+                                    <a href="@ads.Link.ToLink()" target="_blank">@ads.LinkContent.DisplayByMaxLength(30)</a>
+                                }
+                            </td>
+                        }
+                        <td>
+                            <a href="/Manage/EditAds?autokey=@(item.AutoKey)&adspos=@ViewBag.AdsPos&webname=@webname" class="tablelink">編輯</a>
+                            <a href="javascript:void(0);" class="tablelink del" data-value="DelAdsInfo">刪除</a>
+                        </td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

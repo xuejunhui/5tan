@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="@Url.Content("~/Content/Account.css")" rel="stylesheet" type="text/css" />
+<script language="JavaScript" type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.7.1.js")"></script>
+<script type="text/javascript">
+    $(function () {
+        //顶部导航切换
+        $(".nav li a[target=leftFrame]").click(function () {
+            $(".nav li a.selected").removeClass("selected")
+            $(this).addClass("selected");
+            window.parent.frames["rightFrame"].window.showJumpBox(this.id);
+        })
+    })	
+</script>
+
+
+</head>
+
+<body style="background:url(@Url.Content("~/Content/account/topbg.gif")) repeat-x;">
+
+    <div class="topleft">
+    <a href="/" target="_parent"><img src="@Url.Content("~/Content/account/logo.png")" title="系统首页" /></a>
+    </div>
+        
+    <ul class="nav">
+    <li><a href="/Account/Left/0" id="/Manage/Index" target="leftFrame" class="selected"><img alt="" src="@Url.Content("~/Content/account/icon01.png")" title="工作台" /><h2>工作台</h2></a></li>
+    <li><a href="/Account/Left/2" id="/Manage/FunIndex/2" target="leftFrame"><img alt="" src="@Url.Content("~/Content/account/icon02.png")" title="系统分类" /><h2>系统分类</h2></a></li>
+    <li><a href="/Account/Left/3" id="/Manage/FunIndex/3" target="leftFrame"><img alt="" src="@Url.Content("~/Content/account/icon03.png")" title="内容管理" /><h2>内容管理</h2></a></li>
+    <li><a href="/Account/Left/1" id="/Manage/FunIndex/1" target="leftFrame"><img alt="" src="@Url.Content("~/Content/account/icon06.png")" title="网站设置" /><h2>网站设置</h2></a></li>
+    <li><a href="javascript:void(0);" onclick='window.parent.frames["rightFrame"].window.print();' ><img alt="" src="@Url.Content("~/Content/account/icon04.png")" title="列印" /><h2>列印</h2></a></li>
+    </ul>
+            
+    <div class="topright">    
+    <ul>
+    <li><a href="/" target="_blank">浏览网站</a></li>
+    <li><a href="javascript:void(0);" onclick='window.parent.frames["rightFrame"].window.clearCache()'>清除缓存</a></li>
+    <li><a href="javascript:void(0);" onclick='window.parent.location.href="/Manage/SignOut"' target="_parent">退出</a></li>
+    </ul>
+     
+    <div class="user">
+        <a href="javascript:void(0);"><span>@LoginModel.CurrentUser.UserName</span></a>
+        <a href="javascript:void(0);" onclick='window.parent.frames["rightFrame"].window.showJumpBox("/Manage/ChangePassword")'><i>修改密码</i></a>
+    </div>    
+    </div>
+
+</body>
+</html>

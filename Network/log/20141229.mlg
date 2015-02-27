@@ -1,0 +1,6 @@
+11:14:43.729	[DataServer:ExecuteRecords Return List<T>]	Error:Conversion failed when converting the nvarchar value 'Demo' to data type int.
+11:15:54.668	[DataServer:ExecuteRecords Return List<T>]	Error:Conversion failed when converting the nvarchar value 'Demo' to data type int.
+11:16:03.396	[DataServer:ExecuteRecords Return List<T>]	Error:Conversion failed when converting the nvarchar value 'Demo' to data type int.
+11:17:01.660	[DataServer:ExecuteRecords Return List<T>]	Error:Incorrect syntax near 'NetWork'.
+11:17:22.760	[DataServer:ExecuteRecords Return List<T>]	Error:Incorrect syntax near 'NetWork'.
+15:36:31.409	[DataServer:ExecuteOneRecord]	Error:Conversion failed when converting from a character string to uniqueidentifier.

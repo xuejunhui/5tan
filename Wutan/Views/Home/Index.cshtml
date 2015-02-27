@@ -1,0 +1,807 @@
+﻿@section Css{
+    <link href="@Url.Content("~/Content/Index.css")" rel="stylesheet" type="text/css" />    
+}
+<div class="container mtop">
+    <div class="row">
+        <div class="left_banner">
+            <div class="left_banner_bg"></div>
+            <div id="slides">
+                <a href="/" target="_blank"><img src="/Content/img/main5.jpg" width="650" height="350" alt="轮转图片5"/></a>
+                <a href="/" target="_blank"><img src="/Content/img/main4.jpg" width="650" height="350" alt="轮转图片4"/></a>
+                <a href="/" target="_blank"><img src="/Content/img/main3.jpg" width="650" height="350" alt="轮转图片3"/></a>
+                <a href="/" target="_blank"><img src="/Content/img/main2.jpg" width="650" height="350" alt="轮转图片2"/></a>
+                <a href="/" target="_blank"><img src="/Content/img/main1.jpg" width="650" height="350" alt="轮转图片1"/></a>
+            </div>
+        </div>
+        <div class="right_banner">
+            <div class="right_banner_bg"></div>
+            <img border="0" src="/Content/img/jr5tan.gif" alt="" usemap="#Map" style=""/>
+            <div class="reg_note">
+                5TAN.NET专注搭建武潭信息网络,提供时事新闻,生活娱乐,跳转市场,分类信息,网站建设等服务.
+            </div>
+            <map id="Map" name="Map">
+                <area shape="rect" coords="67,280,239,323" href="#" alt="点击进行用户注册" target="_self"/>
+            </map>
+        </div>
+    </div>
+    <div class="hr"></div>
+    <!--新闻-->
+    <div class="row">
+        <div class="pannel_left">
+            <div class="short_top_bg"></div>
+            <h2>
+                <span>
+                    <a target="_blank" href="#" >头条新闻</a>
+                    每天都有新鲜事，稀奇事。让我们一起来爆料吧！
+                </span>
+                <em class="h2l"></em>
+            </h2>
+            <div class="new_list">
+                <ul>
+                    @for (int i = 0; i < 4; i++)
+                    { 
+                        <li>
+                            <a target="_blank" href="/Article/5" >
+                                <img width="70" height="70" alt="Android手机真的那么容易中毒吗？" src="/Upload/small_img_temp.jpg"/>
+                            </a>
+                            <div>
+                                <h3>
+                                    <a target="_blank" title="Android手机真的那么容易中毒吗？" href="/Article/5">Android手机真的那么容易中毒吗？</a>
+                                </h3>
+                                <span>
+                                    <em>0人参与</em>
+                                </span>
+                            </div>
+                            <p title="Android手机真的那么容易中毒吗？">Android手机真的那么容易中毒吗？ </p>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div class="row course_pannel">
+                <p>
+                    每周都有精彩的活动，让我们一起来激情一夏，已有
+                    <em id="course_total">128</em>
+                    人参与！
+                </p>
+                <a class="course_buttom" href="#" target="_self"></a>
+            </div>
+            <div class="row course_pannel">
+                <ul>
+                    <li>
+                        <h3>合成器在拇指上的游戏</h3>
+                        <div class="time">
+                            <span><a target="_blank" href="#"><em>admin</em> </a>发起 </span>
+                            2013-09-03
+                        </div>
+                        <div class="study">
+                            <a href="#" target="_self">参加</a> <span class="flo_l">
+                                <span >0</span> 人参加 </span>
+                        </div>
+                        <div class="line"></div>
+                    </li>
+                     <li>
+                        <h3>合成器在拇指上的游戏</h3>
+                        <div class="time">
+                            <span><a target="_blank" href="#"><em>admin</em> </a>发起 </span>
+                            2013-09-03
+                        </div>
+                        <div class="study">
+                            <a href="#" target="_self">参加</a> <span class="flo_l">
+                                <span >0</span> 人参加 </span>
+                        </div>
+                        <div class="line"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel_right">
+            <h2>
+                <strong>滚动新闻</strong>
+                每周都有更新
+            </h2>
+            <div class="new_video_list">
+                <a id="newVideoGoLeft" class="up on" target="_self" href="javascript:void(0)" title=""></a>
+                <a id="newVideoGoRight" class="down on" target="_self" href="javascript:void(0)" title=""></a>
+                <div class="new_video_list_content">
+                    <ul id="newVideoList">
+                        @for (int i = 0; i < 10; i++)
+                        { 
+                            <li class="today">
+                                <span class="video_date">12-19</span>
+                                <dl>
+                                    <dt>Android手机真的那么容易中毒吗？</dt>
+                                    <dd>
+                                        <a target="_blank" href="/Article/13">Android手机真的那么容易中毒吗？</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+            <div class="pannel_left lifeAndFun" >
+                <div class="long_top_bg"></div>
+                <h2>
+                    <span>
+                        <a target="_blank" href="#">生活娱乐</a>
+                         在这里可以找到你想要的东西，想找的信息
+                    </span>
+                    <em class="h2l"></em>
+                </h2>
+                <div class="pannel">
+                    <dl class="no1">
+                        <dt> 婚庆婚嫁</dt>
+                        <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                        <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                        <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                    </dl>
+                    <dl>
+                        <dt> 婚庆婚嫁</dt>
+                        <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                        <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                        <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                    </dl>
+                    <dl>
+                        <dt> 婚庆婚嫁</dt>
+                        <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                        <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                        <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                    </dl>
+             </div>
+             <div class="pannel" style="margin-top:0px;">
+                <ul class="cklist">
+                    @for (int i = 0; i < 3;i++ )
+                    {
+                    <li>
+                        <a class="img" href="#" target="_blank">
+                            <img width="190" height="142" alt="合成器在拇指上的游戏" src="/Upload/small_img_temp.jpg" />
+                            <h3>合成器在拇指上的游戏</h3>
+                        </a>
+                        <p>
+                            会员： <strong class="name"><a target="_blank" href="#">admin</a> </strong>
+                        </p>
+                        <p>发布时间： 2013-09-03</p>
+                        <span class="zx_n">
+                            <em class="zx_n1" title="查看">1049</em> | <em class="zx_n2" title="讨论人数">0</em>
+                        </span>
+                    </li>
+                    }
+                </ul>
+             </div>
+        </div>
+        <div class="panel_right postList">
+            <h2 class="title">
+                <a title="贴子排行榜" href="#">贴子排行榜</a>
+            </h2>
+            <ul class="phblist">
+                <li>
+                    <span class="no1"></span>
+                    <p><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></p>
+                </li>
+                @for (int i = 2; i < 11; i++)
+                {
+                <li>
+                    <span>@i</span>
+                    <p>
+                        <a target="_blank" title="设计更优的移动支付流程" href="#">设计更优的移动支付流程</a>
+                    </p>
+                </li>
+                }
+            </ul>
+            <div class="post_banner">
+                <a target="_blank" href="#">
+                    <img src="/Upload/xbanner1.jpg" alt="" width="250" height="60"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="pannel_left lifeAndFun">
+        <a name="Shichang"></a>
+        <div class="long_top_bg"></div>
+        <h2>
+            <span>
+                <a target="_blank" href="#">跳蚤市场</a>
+                 这里有很多宝贝哦，亲，快来淘一淘，晒一晒咯！
+            </span>
+            <em class="h2l"></em>
+        </h2>
+         <div class="row pannel">
+            <dl class="no1">
+                <dt> 服装服饰</dt>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+            </dl>
+            <dl>
+                <dt> 婚庆婚嫁</dt>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+            </dl>
+            <dl>
+                <dt> 婚庆婚嫁</dt>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+            </dl>
+         </div>
+         <div class="row pannel" style="margin-top:0px;">
+            <ul class="cklist">
+                @for (int i = 0; i < 3; i++)
+                {
+                <li>
+                    <a class="img" href="#" target="_blank">
+                        <img width="190" height="142" alt="合成器在拇指上的游戏" src="/upload/small_img_temp.jpg" />
+                        <h3>合成器在拇指上的游戏</h3>
+                    </a>
+                    <p>
+                        会员： <strong class="name"><a target="_blank" href="#">admin</a> </strong>
+                    </p>
+                    <p>发布时间： 2013-09-03</p>
+                    <span class="zx_n">
+                        <em class="zx_n1" title="查看">1049</em> | <em class="zx_n2" title="讨论人数">0</em>
+                    </span>
+                </li>
+                }
+            </ul>
+         </div>
+    </div>
+    <div class="panel_right postList">
+        <h2 class="title">
+            <a title="贴子排行榜" href="#">宝贝排行榜</a>
+        </h2>
+        <ul class="phblist">
+            <li>
+                <span class="no1"></span>
+                <p><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></p>
+            </li>
+            @for (int i = 2; i < 11; i++)
+            {
+            <li>
+                <span>@i</span>
+                <p>
+                    <a target="_blank" title="设计更优的移动支付流程" href="#">设计更优的移动支付流程</a>
+                </p>
+            </li>
+            }
+        </ul>
+        <div class="post_banner">
+            <a target="_blank" href="#">
+                <img src="/upload/xbanner1.jpg" alt="" width="250" height="60"/>
+            </a>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="pannel_left lifeAndFun category_panel">
+        <div class="long_top_bg"></div>
+        <h2>
+            <span>
+                <a target="_blank" href="#">分类信息</a>
+                这里包含了招聘信息，人才信息，房产信息，租房信息。
+            </span>
+            <em class="h2l"></em>
+        </h2>
+        <div class="row pannel special_category_list">
+            <dl class="no1">
+                <dt> 人才招聘</dt>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+            </dl>
+            <dl>
+                <dt> 租房信息</dt>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">设计更优的移动支付流程</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+            </dl>
+            <dl>
+                <dt> 交友中心</dt>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">设计更优的移动支付流程</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+            </dl>
+            <dl>
+                <dt> 个人简历</dt>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">设计更优的移动支付流程</a></dd>
+                <dd><a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a></dd>
+            </dl>
+         </div>
+    </div>
+        <div class="category_banner">
+            <a target="_blank" href="#">
+                <img src="/Upload/banner.jpg" alt="banner"/>
+            </a>
+        </div>
+    </div>
+    <div class="row mtop30">
+    <div class="category_tag">
+        <dl>
+            <dt><a href="#">房屋租售</a> </dt>
+            <dd>
+                <span><a href="#">出售房屋</a> |&nbsp;</span>
+                <span><a href=".#">出租房屋</a></span>
+                <span><a href="#">二手房产</a> |&nbsp;</span>
+                <span><a href="#">房产楼盘</a> </span>
+            </dd>
+            <dt><a href="#">房屋租售</a> </dt>
+            <dd>
+                <span><a href="#">出售房屋</a> |&nbsp;</span>
+                <span><a href=".#">出租房屋</a>  </span>
+                <span><a href="#">二手房产</a> |&nbsp;</span>
+                <span><a href="#">房产楼盘</a> </span>
+            </dd>
+            <dt><a href="#">房屋租售</a> </dt>
+            <dd>
+                <span><a href="#">出售房屋</a> |&nbsp;</span>
+                <span><a href=".#">出租房屋</a>  </span>
+                <span><a href="#">二手房产</a> |&nbsp;</span>
+                <span><a href="#">房产楼盘</a> </span>
+            </dd>
+            <dt><a href="#">房屋租售</a> </dt>
+            <dd>
+                <span><a href="#">出售房屋</a> |&nbsp;</span>
+                <span><a href=".#">出租房屋</a> </span>
+            </dd>
+        </dl>
+    </div>
+    <div class="category_list">
+        <div class="category_list_title">
+            <ul>
+                <li class="on" id="c_list1"><a href="javascript:void(0)" target="_self">房屋出租</a></li>
+                <li class="" id="c_list2"><a href="javascript:void(0)" target="_self">个人求职</a> </li>
+                <li class="" id="c_list3"><a href="javascript:void(0)" target="_self">交友中心</a> </li>
+                <li class="" id="c_list4"><a href="javascript:void(0)" target="_self">人才招聘</a> </li>
+            </ul>
+        </div>
+        <div class="category_list_c">
+            <ul style="display:block;" id="u_c_list1">
+                <li class="no1">
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">房屋出租</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">房屋出租</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">房屋出租</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">房屋出租</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">房屋出租</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li class="no1">
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">房屋出租</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">房屋出租</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">房屋出租</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">房屋出租</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">房屋出租</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+            </ul>
+            <ul  id="u_c_list2">
+                <li class="no1">
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">个人求职</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">个人求职</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">个人求职</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">个人求职</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">个人求职</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li class="no1">
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">个人求职</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">个人求职</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">个人求职</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">个人求职</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">个人求职</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+            </ul>
+            <ul id="u_c_list3">
+                <li class="no1">
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">交友中心</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">交友中心</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">交友中心</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">交友中心</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">交友中心</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li class="no1">
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">交友中心</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">交友中心</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">交友中心</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">交友中心</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">交友中心</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+            </ul>
+            <ul id="u_c_list4">
+                <li class="no1">
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">人才招聘</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">人才招聘</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">人才招聘</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">人才招聘</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">人才招聘</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li class="no1">
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">人才招聘</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">人才招聘</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">人才招聘</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">人才招聘</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+                <li>
+                    <span class="list_l"><a target="_blank" title="房屋出租" href="#">人才招聘</a> </span>
+                    <span class="list_c"><a target="_blank" title="外滩精装好房业主急租白菜价" href="#">外滩精装好房业主急租白菜价</a> <em>（2013-09-03）</em> </span>
+                    <span class="list_r"><a target="_blank" href="#">admin</a> </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="category_hot">
+        <h2><span style="margin-top:0px;">热门信息</span></h2>
+        <ul>
+            <li>
+                <a target="_blank" href="#">
+                    <img width="250" height="150" alt="合成器在拇指上的游戏" src="/Upload/small_img_temp.jpg"/>
+                </a>
+                <h3>
+                    <a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a>
+                </h3>
+            </li>
+            <li>
+                <a target="_blank" href="#">
+                    <img width="250" height="150" alt="合成器在拇指上的游戏" src="/Upload/small_img_temp.jpg"/>
+                </a>
+                <h3>
+                    <a target="_blank" title="合成器在拇指上的游戏" href="#">合成器在拇指上的游戏</a>
+                </h3>
+            </li>
+        </ul>
+    </div>
+    </div>
+    <div class="row">
+        <div class="pannel_left lifeAndFun" style="width:950px;">
+        <a name="User"></a>
+        <div class="long_top_bg"></div>
+        <h2>
+            <span>
+                <a target="_blank" href="#">活跃会员</a>
+                 你可以在这里展示的你头相，认识更多的朋友哦，快来参加吧！
+            </span>
+            <em class="h2l"></em>
+        </h2>
+        <div class="active_member">
+            <ul>
+                <li class="cl">
+                <a class="img_l" href="#">
+                    <img width="70" height="70" src="/Upload/avatar_member.jpg" alt="admin1"/>
+                </a>
+                <div class="jsinfo" style="display: none;">
+                    <a class="img_t" href="#">
+                        <img class="img-responsive" src="/Upload/avatar_member.jpg" alt="admin1"/>
+                    </a>
+                    <p>
+                        <strong>admin1</strong>
+                    </p>
+                </div>
+            </li>
+            @for (int i = 0; i < 23; i++)
+            {
+                
+                <li class="cl">
+                    <a class="img_l" href="#">
+                        <img width="70" height="70" src="/Upload/noavatar_big.gif" alt="admin@(i)"/>
+                    </a>
+                    <div class="jsinfo" style="display: none;">
+                        <a class="img_t" href="#">
+                            <img class="img-responsive" src="/Upload/noavatar_big.gif" alt="admin@(i)"/>
+                        </a>
+                        <p>
+                            <strong>admin@(i)</strong>
+                        </p>
+                    </div>
+                </li>
+            }
+            </ul>
+        </div>
+        <div class="active_txt">
+            <div style="clear:both">
+                <h3 class="title_a">
+                    <span class="t_jstxt">会员竞价展示</span>
+                </h3>
+            </div>
+            <div style="clear:both">
+                <p>
+                    你可以设置金币进行竞价排名，金币越多，排名越靠前哦！亲，快来这里展示的你头相吧，可以认识更多的朋友哦，快来参加吧！</p>
+                <p class="p_btn">
+                    <a href="#" target="_blank"></a>
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="pannel_left lifeAndFun" style="width:950px;">
+        <div class="long_top_bg"></div>
+        <ul class="footer_list">
+            <li>
+                <h4><a href="#" title="新手指南" target="_blank">新手指南</a></h4>
+                <p><a href="#" title="注册用户" target="_blank">注册用户</a></p>
+                <p><a href="#" title="第三方登录" target="_blank">第三方登录</a></p>
+                <p><a href="#" title="账号设置" target="_blank">账号设置</a></p>
+                <p><a href="#" title="发贴指导" target="_blank">发贴指导</a></p>
+            </li>
+            <li>
+                <h4><a href="#" title="新手指南" target="_blank">关于我们</a></h4>
+                <p><a href="#" title="注册用户" target="_blank">联系我们</a></p>
+                <p><a href="#" title="第三方登录" target="_blank">在线留言</a></p>
+                <p><a href="#" title="账号设置" target="_blank">发展历程</a></p>
+                <p><a href="#" title="发贴指导" target="_blank">免责声明</a></p>
+            </li>
+            <li>
+                <h4><a href="#" title="新手指南" target="_blank">会员特权</a></h4>
+                <p><a href="#" title="注册用户" target="_blank">会员升级</a></p>
+                <p><a href="#" title="第三方登录" target="_blank">经验获取规则</a></p>
+                <p><a href="#" title="账号设置" target="_blank">邀请小伙伴</a></p>
+            </li>
+            <li>
+                <h4><a href="#" title="新手指南" target="_blank">广告服务</a></h4>
+                <p><a href="#" title="账号设置" target="_blank">服务类型</a></p>
+                <p><a href="#" title="注册用户" target="_blank">费用计算</a></p>
+                <p><a href="#" title="第三方登录" target="_blank">支付方式</a></p>
+                <p><a href="#" title="常见问题" target="_blank">诚邀赞助</a></p>
+
+            </li>
+            <li class="last">
+                <h4><a href="#" title="新手指南" target="_blank">帮助中心</a></h4>
+                <p><a href="#" title="常见问题" target="_blank">常见问题</a></p>
+                <p><a href="#" title="注册用户" target="_blank">如何联系站长</a></p>
+            </li>
+        </ul>
+     </div>
+     <div class="pannel_left f_links" style="width:950px;">
+        <div class="f_links_head">
+        <h2>友情链接</h2>
+        <a href="#">点击申请友情链接</a>
+        </div>
+        <ul>
+            <li><a href="#">武潭门户</a></li>
+            <li><a href="#">武潭门户</a></li>
+            <li><a href="#">武潭门户</a></li>
+            <li><a href="#">武潭门户</a></li>
+            <li><a href="#">武潭门户</a></li>
+            <li><a href="#">武潭门户</a></li>
+            <li><a href="#">武潭门户</a></li>
+        </ul>
+     </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        //头部幻灯
+        $("#slides").slidesjs({
+            preload: true,
+            preloadImage: '/Content/img/loading.gif',
+            width: 650,
+            height: 350,
+            play: {//播放设置
+                auto: true, //设置为自动播放
+                interval: 5000 //设置为每次轮番的间隔时间以毫秒为单位
+            }
+        });
+
+        $("#slides").hover(function () {
+            $(".slidesjs-navigation").show();
+        }, function () {
+            $(".slidesjs-navigation").hide();
+        });
+
+        $("#slides a").focus(function () {
+            this.blur();
+        });
+
+        var flag = true; //防止未完成动作时的连续点击 此次ie7有些许问题未解决
+        $(".new_video_list a[id^=newVideoGo]").click(function () {
+            var top = parseInt($("#newVideoList").css("margin-top"));
+            var len = parseInt($("#newVideoList li").length * 170) - 405;
+            var poor = 0;
+            if (flag) {
+                flag = false;
+                if ($(this).attr("class") == "up on") {
+                    if ((len + top) - 170 > 0) {
+                        $("#newVideoList").animate({ marginTop: "-=170" }, 600, function () {
+                            flag = true;
+                        });
+                    } else {
+                        poor = len + top;
+                        $("#newVideoList").animate({ marginTop: "-=" + poor + "" }, 600, function () {
+                            flag = true;
+                        });
+                    }
+
+                } else {
+                    if (top < 0) {
+                        if (top + 170 > 0) {
+                            poor = -top;
+                            $("#newVideoList").animate({ marginTop: "+=" + poor + "" }, 600, function () {
+                                flag = true;
+                            });
+
+                        } else {
+                            $("#newVideoList").animate({ marginTop: "+=170" }, 600, function () {
+                                flag = true;
+                            });
+                        }
+                    } else
+                        flag = true;
+                }
+            }
+
+        });
+
+        //选项卡效果
+        $(".category_list_title ul li").mouseover(function () {
+            var curr = $(".category_list_title ul li.on");
+            curr.attr("class", "");
+            $("#u_" + curr.attr("id")).hide();
+            $(this).attr("class", "on");
+            $("#u_" + $(this).attr("id")).show();
+        });
+
+        //图片放大效果
+        $('.active_member li').hover(function () {
+            var aWrap = $('.active_member ul');
+            var aBox = $(this).find('.jsinfo');
+            var wrapX = aWrap.offset().left + aWrap.width() + 35;
+            var wrapY = aWrap.offset().top + aWrap.height() + 18;
+            var divX = $(this).offset().left + $(this).width() + 78;
+            var divY = $(this).offset().top + $(this).width() + 127;
+            //alert(divX);
+            if (divX > wrapX) {
+                aBox.css({ left: -(divX - wrapX + 20) + 'px' });
+            };
+            if (divY > wrapY) {
+                aBox.css({ top: (wrapY - divY - 15) + 'px' });
+            };
+            $(this).addClass('active');
+            $(this).find('.jsinfo').delay(250).fadeIn(200);
+        }, function () {
+            $(this).removeClass('active');
+            $(this).find('.jsinfo').stop(true, true).hide(100);
+        });
+    });
+</script>

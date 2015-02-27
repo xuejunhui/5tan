@@ -1,0 +1,58 @@
+﻿/*全局樣式*/
+body {background-color: #ffffff;color: #333333;font: 12px/1.42857 Tahoma,"Microsoft Yahei","Simsun";margin: 0;}
+body,ul,ol,li,dl,dd,p,h1,h2,h3,h4,h5,h6,form,fieldset,.mp0,button{margin:0;padding:0;}
+ul li,.xl li{list-style:none;}
+a{color:#333;text-decoration:none;}
+a:hover{text-decoration:none;color:#557917;}
+a img{border:none;}
+label{cursor:pointer;}
+.left{float:left;}
+.right{float:right;}
+.container{width:100%;}
+.container:before, .container:after { content: " ";display: table;}
+.container:after{clear: both;}
+.cl:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clear {clear: both;display: block;height: 0;overflow: hidden;visibility: hidden;content: " ";}
+.cl{zoom:1;}
+.row {clear: both;margin: 0 auto;width: 1002px;}
+.row:after {clear: both;}
+.row:before, .row:after {content: " ";display: table;}
+.titlecolor{color: #999 !important}
+.ptop{padding-top:10px;}
+.mtop{margin-top:10px;}
+.mtop30{margin-top:20px;}
+.mtop30{margin-top:30px;}
+.hr{width: 100%;border-bottom: 1px solid #DCDCDC;overflow: hidden;display:block;padding:0;margin:0;background-color: #FFFFFF;_margin-top: -2px; *margin-top: -16px;}
+.pa { position: absolute; }
+.pr { position: relative; }
+.dn { display: none; }
+.db { display: block; }
+
+/*网站公用底部样式*/
+.bs-footer{border-top: 1px solid #E5E5E5; color: #777777; margin-top: 100px; padding-bottom: 30px; padding-top: 40px; text-align: center;}
+.bs-footer p{margin-bottom: 0;}
+.footer-links{margin: 10px 0; padding-left: 0;}
+.footer-links li:first-child{padding-left: 0;}
+.footer-links li{display: inline; padding: 0 2px;}
+
+/*-----------------------------Header--------------------------------*/
+.Logo { width: 170px; height: 185px; left: 0; top: 0; }
+.Header { position: absolute; top: 20px; left: 0; z-index: 4; text-align: center; }
+.Nav { width: 780px; height: 40px; line-height: 40px; margin-top: 40px; z-index: 100; position: relative; }
+.Nav li, .Nav a { width: 78px; height: 40px; float: left; text-align: center; font-size: 14px; background: #fff; }
+.Nav li > a:hover { background: #FE4C40; color: #fff; }
+.Nav li.hover a{background: #ec054b;color: #fff;}
+.Nav li:hover .subMenu{height:200px; border-bottom:3px solid red;}
+.subMenu { width: 780px; height: 0; background: #f3f3f3; position: absolute; left: 0; top: 40px; overflow: hidden; z-index: 1000; }
+.subMenu li, .subMenu a { width: 200px; height: 30px; line-height: 30px; text-align: center; float: left; }
+.subMenu a { background: url(network/navDemo.jpg) 0 0; }
+#navBottom { width: 780px; height: 57px; position: absolute; top: 35px; left: 0; background: none; }
+.navPart1 { width: 200px; height: 160px; padding: 20px; }
+.navPart1 span { float: left; margin-top: 10px; }
+.navPart2 { width: 280px; height: 160px; padding: 20px; }
+.navPart2EnTitle { font-size: 9pt; float: left; width: 100%; }
+.navPart2CnTitle { font-size: 9pt; float: left; width: 100%; }
+.navPart2Desc { color: 9pt; color: #a9a9a9; float: left; line-height: 20px; text-align: left; width: 100%; }
+.navPart3 { width: 200px; height: 160px; background: red; margin-top: 20px; }
+.navPart4 { width: 420px; padding: 20px; padding-right: 100px; }
+.navPart4 span { margin-top: 10px; }

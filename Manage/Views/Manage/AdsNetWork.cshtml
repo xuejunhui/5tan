@@ -1,0 +1,25 @@
+﻿<div class="place">
+<span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/1")'>NetWork网站设置</a></li>
+        <li><a href="javascript:void(0);" >广告位列表</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <ul class="classlist">
+        @{ Array arr = Enum.GetValues(typeof(AdsNetWorkPos));}
+        @foreach(var item in arr)
+        {
+            <li><span>
+                    <img src="/Content/Account/001.jpg" alt=""/>
+                </span>
+                <div class="lright">
+                <h2>@item.ToString().ToAdsNetWorkPos().GetAdsNetWorkName()</h2>
+                <a class="enter" href="/Manage/AdsManage/@item.ToString()?webname=@WebName.NetWork.ToString()">进入广告位</a>
+                </div>
+            </li>
+        }
+        
+    </ul>
+</div>
+

@@ -1,0 +1,32 @@
+﻿@section Js{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: '/manage/Weather',
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function () { },
+                complete: function () { },
+                success: function (data) {
+                    $("#weather").html("<span><img src='" + data.results[0].weather_data[0].daypictureurl + "'/></span><i>" + data.results[0].weather_data[0].weather + "&nbsp;&nbsp;" + data.results[0].weather_data[0].date + "&nbsp;&nbsp;所在城市:&nbsp;" + data.results[0].currentcity + "</i>");
+                }
+            });
+        });
+    </script>
+}
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    </ul>
+    </div>
+    
+    <div class="mainindex">
+    
+    
+    <div class="welinfo" id="weather"></div>
+    
+    <div class="xline"></div>
+        @Html.Action("FunIndex")
+    </div>

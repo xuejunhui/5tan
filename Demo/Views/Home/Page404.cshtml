@@ -1,0 +1,44 @@
+﻿@model SearchModel<RecordItem>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>错误提示 @ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName</title>
+<meta name="keywords" content="网站错误页面 错误提示 404 500 505" />
+<meta name="description" content="找不到你所访问的页面或网站发生了不可预计的错误,请返回首页或其它页面继续浏览网站" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="author" content="5TAN.NET" />
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/Search.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+</head>
+<body style="background:#edf6fa;">
+    <div id="toptb" class="cl" style="background:#edf6fa;">
+        <div class="z">
+            <a id="navs" class="xi2"  href="/" initialized="true">返回首页</a>
+        </div>
+        <div class="y">
+            <a href="@URLUtility.CategoryUrl(0, "Overseas")" class="xi2"  hidefocus="true"title="港澳台及境外">港澳台及境外</a>
+            <a href="@URLUtility.CategoryUrl(0, "Domestic")" class="xi2"  hidefocus="true" title="国内">国内</a>
+            <a href="@URLUtility.CategoryUrl(0, "Province")" class="xi2"  hidefocus="true" title="省内">省内</a>
+            <a href="@URLUtility.VisaCenterUrl()" class="xi2"  hidefocus="true" title="签证">签证</a>
+            <a href="@URLUtility.GuideCenterUrl()" class="xi2"  hidefocus="true" title="目的地指南">目的地指南</a>
+            <a href="@URLUtility.RaiderCenterUrl()" class="xi2"  title="旅游攻略">旅游攻略</a>
+            <a href="@URLUtility.ContactUrl(0, "ContactUs")" class="xi2" hidefocus="true" title="联系我们">联系我们</a>
+        </div>
+    </div>
+    <div class="error">
+        <h2>抱歉！您访问的内容已经意外丢失</h2>
+        <p>请点击按钮返回网站首页继续访问网站.</p>
+        <div class="reindex"><a href="/">返回首页</a></div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('.error').css({ 'position': 'absolute', 'left': ($(window).width() - 490) / 2 });
+            $(window).resize(function () {
+                $('.error').css({ 'position': 'absolute', 'left': ($(window).width() - 490) / 2 });
+            })
+        });  
+    </script> 
+</body>
+</html>

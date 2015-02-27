@@ -1,0 +1,37 @@
+﻿@model CategoryViewData
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/2")'>系统分类</a></li>
+        <li><a href="javascript:void(0);" >@Model.Menu.MenuName</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    
+    <table class="tablelist">
+    	<thead>
+    	    <tr>
+                <th>分类名</th>
+                <th>分类SEO</th>
+                <th>描述</th>
+                <th>下级分类数</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Data)
+            { 
+                <tr>
+                    <td>@item.CategoryName</td>
+                    <td>@item.SEOURL</td>
+                    <td>@item.Description</td>
+                    <td>@item["childscount"]</td>
+                    <td>
+                        <a href="/Manage/EditCategory?autokey=@item.AutoKey&parentid=@item.ParentID&menuid=@Model.Menu.ID" class="tablelink">编辑</a>
+                        <a href="/Manage/CategoryListByParentID?parentid=@item.AutoKey&id=@Model.Menu.ID" class="tablelink">下级分类</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

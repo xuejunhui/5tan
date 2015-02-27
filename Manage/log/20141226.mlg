@@ -1,0 +1,9 @@
+13:58:53.385	[DataServer:ExecuteRecords Return List<T>]	Error:Incorrect syntax near 'webName'.
+14:00:01.383	[DataServer:ExecuteRecords Return List<T>]	Error:Incorrect syntax near 'webName'.
+14:00:20.412	[DataServer:ExecuteRecords Return List<T>]	Error:Incorrect syntax near 'webName'.
+14:00:28.110	[DataServer:ExecuteRecords Return List<T>]	Error:Incorrect syntax near 'webName'.
+14:02:58.315	[DataServer:ExecuteRecords Return List<T>]	Error:Incorrect syntax near 'webName'.
+14:04:02.813	[DataServer:ExecuteRecords Return List<T>]	Error:Incorrect syntax near 'webName'.
+14:04:38.650	[DataServer:ExecuteRecords Return List<T>]	Error:Incorrect syntax near 'webName'.
+14:27:27.512	[DataServer:ExecuteRecords Return List<T>]	Error:Conversion failed when converting the nvarchar value 'Demo' to data type int.
+16:57:11.611	[DataServer:ExecuteRecords Return List<T>]	Error:The parameterized query '(@autokey int,@categoryname nvarchar(4000))exec GetCategoryAllPa' expects the parameter '@categoryname', which was not supplied.

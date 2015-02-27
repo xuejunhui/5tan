@@ -1,0 +1,63 @@
+﻿@model String
+@{
+    ContentBLL bll = new ContentBLL();
+    List<ContentTB> list = bll.GetRelatedContent(WebName.Demo, Model, 0, 5, 1, false);
+}
+@if (list != null && list.Count() > 0)
+{ 
+<div class="columns cl">
+    <div class="photo-big mr30">
+        @{ContentTB first = list.FirstOrDefault();}
+        <div id="photo-big-l" class="area">
+            <div class="photo-pic">
+                <a title="@first.Title" href="@URLUtility.SummerDetailUrl(first.AutoKey,first.SEOURL)">
+                    <img width="330" height="220" alt="@first.Title" src="@first.PreviewIMG.GetSmallUrl()"/>
+                </a>
+            </div>
+            <h3>
+                <a target="_blank" title="@first.Title" href="@URLUtility.SummerDetailUrl(first.AutoKey,first.SEOURL)">@first.Title.DisplayByMaxLength(15)</a>
+            </h3>
+            <div class="meta">
+                <span class="meta-column">
+                <i></i>
+                <a title="@first["CategoryName"]" href="@URLUtility.CategoryUrl(first.CategoryID,"")">@first["CategoryName"]</a>
+                </span>
+                <span class="delim"></span>
+                <span class="meta-data">@String.Format("{0:yyyy-MM-dd}",first.CreateTime)</span>
+                <span class="delim"></span>
+                <span class="meta-comments price">
+                <i></i>
+                    ￥@first.Price.ToPrice()
+                </span>
+            </div>
+            <p class="mt20">@first.Description.MaxDisplayLen(30)</p>
+        </div>
+
+    </div>
+
+    <div class="photo-small">
+        <div id="photo-small-l" class="area">
+            <ul>
+            @foreach (var item in list)
+            {
+                if (item != first)
+                {
+                <li>
+                    <div class="photo-pic">
+                    <a title="@item.Title" href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)">
+                        <img width="100" height="75" alt="@item.Title" src="@item.PreviewIMG.GetSmallUrl()"/>
+                    </a>
+                    </div>
+                    <h3>
+                    <a class="link" title="@item.Title" href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)">@item.Shorttitle</a>
+                    </h3>
+                    <p title="@item.Description">@item.Description.DisplayByMaxLength(25)</p>
+                </li>
+                }
+            }
+
+            </ul>
+        </div>
+    </div>
+</div>
+}

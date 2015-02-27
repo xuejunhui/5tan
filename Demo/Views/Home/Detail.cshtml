@@ -1,0 +1,189 @@
+﻿@model SummerDetailModel
+@{
+    ViewBag.Title = Model.ContentModel.Title;
+    ViewBag.Keywords = Model.ContentModel.KeyWord;
+    ViewBag.Description = Model.ContentModel.Description;
+}
+@section Css{
+    <link href="@Url.Content("~/Content/Detail.css")" rel="stylesheet" type="text/css" />
+}
+<div  id="wp" class="wp j_wp">
+    @Html.Partial("_Nav", Model.CategoryNav)
+    <div id="ct" class="ct2 wp cl">
+        <div class="detail-overview">
+            <div class="overview-img">
+                <img src="@Model.Content.PreviewIMG.GetSmallUrl()" alt="" width="360" height="200"/>
+            </div>
+            <div class="overview-description">
+                <div class="product-name">
+                    <h1>@Model.Content.Title</h1>
+                </div>
+                <div class="product-price">
+                    <div class="product-price-item">
+                        <div class="product-price-title product-lvmama-price"> 预定价格： </div>
+                        <div class="product-price-content product-price-content-val cl">
+                            <span class="product-price-rmb">
+                                <span class="rmb-symbol">¥</span>
+                                <span class="product-price-value"> @Model.Content.Price.ToPrice() </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="product-price-item">
+                        <div class="product-price-title color-style1"> 出游天数： </div>
+                        <div class="product-price-content">
+                            <span>@Model.Content.TravelingDays</span>
+                        </div>
+                        <div class="product-price-title color-style1"> 交通工具： </div>
+                        <div class="product-price-content cl">
+                            <span>@Model.Content.Transport</span>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="product-price-item">
+                        <div class="product-price-title color-style1"> 提前报名： </div>
+                        <div class="product-price-content">
+                            <span>@Model.Content.MinSignUp</span>
+                        </div>
+                        <div class="product-price-title color-style1"> 参团类型： </div>
+                        <div class="product-price-content cl">
+                            <span>@Model.Content.OfferedType</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            
+        </div>
+        <div class="detail-overview">
+            <div id="nav-height-holder" class="nav-height-holder">
+                <div id="product-detail-header" class="product-detail-header clearfix">
+                    <ul id="navigate-list">
+                        <li>
+                            <a class="active color-style2" data-flag="product-detail" href="javascript:void(0);">行程安排</a>
+                        </li>
+                        <li>
+                            <a class="" data-flag="product-travel" href="javascript:void(0);">报价说明</a>
+                        </li>
+                        <li>
+                            <a class="" data-flag="product-prompt" href="javascript:void(0);">友情提示</a>
+                        </li>
+                        @if (Model.Guides != null && Model.Guides.Count() > 0)
+                        { 
+                            <li>
+                                <a class="" data-flag="product-guide" href="javascript:void(0);">目的地指南</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="product-modules clearfix">
+                <div class="product-pm-recommand clearfix">
+                    <div class="pm-recommand-title clearfix">
+                        <div class="recommand-left-quotation"> </div>
+                        <h3 class="recommand-title-main">线路特色</h3>
+                        <div class="recommand-right-quotation"> </div>
+                    </div>
+                    <div class="pm-recomman-body">
+                        <ul>
+                            @foreach (var item in Model.Content.Features.Split(Environment.NewLine))
+                            { 
+                                <li>@item</li>    
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div id="product-detail" class="product-detail-instance">
+                    <div class="instance-title clearfix">
+                        <div class="title-icon-container">
+                            <i class="product-line-icon"></i>
+                        </div>
+                        <h3>行程安排</h3>
+                    </div>
+                    <div class="detail-instance-body">
+                    <div class="PriceContext">
+                             @Html.Raw(Model.ContentModel.XMLContent.ProductDetail)
+                        </div>
+                    </div>
+                </div>
+                <div id="product-travel" class="product-detail-instance">
+                    <div class="instance-title clearfix">
+                        <div class="title-icon-container">
+                            <i class="product-cost-icon"></i>
+                        </div>
+                        <h3>报价说明</h3>
+                    </div>
+                    <div class="detail-instance-body">
+                        <div class="PriceContext">
+                            @Html.Raw(Model.ContentModel.XMLContent.ProductTravel)
+                        </div>
+                    </div>
+                </div>
+                <div id="product-prompt" class="product-detail-instance">
+                    <div class="instance-title clearfix">
+                        <div class="title-icon-container">
+                            <i class="product-notice-icon"></i>
+                        </div>
+                        <h3>友情提示</h3>
+                    </div>
+                    <div class="detail-instance-body">
+                        <div class="PriceContext">
+                           @Html.Raw(Model.ContentModel.XMLContent.ProductPrompt)
+                        </div>
+                    </div>
+                </div>
+                 @if (Model.Guides != null && Model.Guides.Count() > 0)
+                 {
+                     int index = 1;
+                    <div id="product-guide" class="product-detail-instance">
+                        <div class="instance-title clearfix">
+                            <div class="title-icon-container">
+                                <i class="product-map-icon"></i>
+                            </div>
+                            <h3>目的地指南</h3>
+                        </div>
+                        <div class="detail-instance-body">
+                            <div class="PriceContext">
+                                <p class="alert"><strong>@(ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName)</strong>为您提供了关于<strong>@Model.Content.Title</strong>的旅遊指南</p>
+                               @foreach (var item in Model.Guides)
+                               { 
+                                   <a href="@URLUtility.GuideDetailUrl(item.AutoKey)" target="_blank">@item.GuideName</a>
+                                   if (index % 8 != 0 && index!=Model.Guides.Count())
+                                   { 
+                                    <span class="pipe">|</span>
+                                   }
+                                   index++;
+                               }
+                            </div>
+                        </div>
+                    </div>
+                 }
+            </div>
+        </div>
+    </div>
+    <div class="jeavi_con cl">
+        <div class="portal-hd">
+            <div id="all-pic-t" class="area">
+                <h2>推荐线路</h2>
+            </div>
+        </div>
+        <div class="content-list">
+            <ul class="cpro-list">
+            @foreach(var item in Model.RelatedContent)
+            {
+                <li>   
+                    <a class="text-cover auto_img" href="@URLUtility.SummerDetailUrl(item.AutoKey,item.SEOURL)" target="_blank" title="@item.Title" hidefocus="false">
+                        <img width="180" height="120" alt="@item.Title" src="@item.PreviewIMG.GetSmallUrl()"/>
+                        <span></span>
+                        <i>
+                            <b>@item.Shorttitle</b>
+                            <em> | </em>
+                            <b>￥@item.Price.ToPrice()</b>
+                        </i>
+                    </a>
+                </li>
+            }
+            </ul>
+        </div>
+    </div>
+</div>

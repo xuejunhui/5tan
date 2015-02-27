@@ -1,0 +1,13 @@
+13:41:45.227	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+13:42:13.361	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+13:42:13.381	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+13:42:13.401	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+13:42:13.421	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+13:42:13.441	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+13:42:31.799	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+13:43:04.526	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+13:43:04.535	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+13:43:04.547	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+13:43:04.558	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+13:43:04.572	[BLL.DataAccess:CreateObject]	Error:Could not load file or assembly 'WTAN.SQLServerDAL' or one of its dependencies. The system cannot find the file specified.
+16:49:35.934	[DataServer:ExecuteRecords Return List<T>]	Error:Implicit conversion from data type nvarchar to timestamp is not allowed. Use the CONVERT function to run this query.

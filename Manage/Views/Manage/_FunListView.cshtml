@@ -1,0 +1,21 @@
+﻿@model List<MenuItem>
+@foreach (var item in Model)
+{
+<div class="formtitle"><span>@item.MenuName</span></div>
+<div class="toolsli">
+    <ul class="toollist">
+        @foreach (var c in item.ChildItems)
+        {
+            if (c.Visible == 1)
+            {
+            <li>
+                <a href="@c.Url">
+                <img src="@c.IcoName" width="65" height="65"/>
+                </a>
+                <h2>@c.MenuName</h2>
+            </li>
+            }
+        }
+    </ul>
+</div>
+}

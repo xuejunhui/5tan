@@ -1,0 +1,85 @@
+﻿@model SearchModel<FriendLinkTB>
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/3")'>内容管理</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Content/FriendLink")'>友情链接</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div id="usual1" class="usual"> 
+        <div class="tools">
+            @using (Html.BeginForm("FriendLink", "Content", FormMethod.Get))
+            {
+                <ul class="seachform">
+                    <li>
+                        <label>审核</label>
+                        <div class="cityleft">
+                            @Html.DropDownListFor(s => s.IsEnable, new List<SelectListItem> { 
+                                new SelectListItem(){Text="所有",Value=""},
+                                new SelectListItem(){Text="未审核",Value="0"},
+                                new SelectListItem(){Text="已审核",Value="1"}
+                            }, new { @class = "select3" })
+                        </div>
+                    </li>
+                    <li>
+                        <label></label>
+                    </li>
+                    <li><label>查询</label>
+                        @Html.TextBoxFor(s => s.Keyword, new { @class = "scinput" })
+                        @Html.HiddenFor(s=>s.WebName)
+                    </li>
+                    <li><label>&nbsp;</label><input type="submit" class="scbtn" value="查询"/></li>
+                </ul>
+            }
+            </div>
+        <div class="tools">
+            <ul class="toolbar1">
+                <li id="setEnableState1" data-action="VerifyFriendLink" data-value="1"><span><img alt="" src="/content/account/check_list-24.png" /></span>批量审核</li>
+                <li id="setEnableState0" data-action="VerifyFriendLink" data-value="0"><span><img alt="" src="/content/account/cancelstate.png" /></span>批量取消审核</li>
+                <li onclick='showJumpBox("/Content/EditFriendLink?autokey=0")'><span><img alt="" src="/content/account/t01.png" /></span>新增友链</li>
+                <li id="BulkDelete" data-value="DelFriendLinkInfo"><span><img alt="" src="/content/account/t03.png" /></span>批量刪除</li>
+                @if (!string.IsNullOrEmpty(Model.Keyword) || !string.IsNullOrEmpty(Model.IsEnable))
+                { 
+                    <li onclick='showJumpBox("/Content/FriendLink")'><span><img  alt="" src="/content/account/t04.png" /></span>清除查询</li>
+                }
+            </ul>
+        </div>
+        <table class="tablelist">
+    	    <thead>
+    	        <tr>
+                    <th width="50"><input id="cball" type="checkbox" /></th>
+                    <th>友链名称</th>
+                    <th>链接地址</th>
+                    <th>备注</th>
+                    <th width="50">审核</th>
+                    <th width="80">创建时间</th>
+                    <th width="130">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model.DataList)
+                    {
+                       <tr>
+                            <td><input name="cbno" type="checkbox" value="@item.AutoKey" /></td>
+                            <td>@item.LinkName.ToEmptyTrimString().DisplayByMaxLength(20)</td>
+                            <td>@item.LinkUrl.ToEmptyTrimString().DisplayByMaxLength(20)</td>
+                            <td>@item.Note.ToEmptyTrimString().DisplayByMaxLength(20)</td>
+                            <td>@(item.Enable ? "通过" : "未审核")</td>
+                            <td>@String.Format("{0:yyyy-MM-dd}", item.CreateTime)</td>
+                            <td>
+                                <a href="/Content/EditFriendLink?autokey=@(item.AutoKey)" class="tablelink">編輯</a>
+                                <a href="javascript:void(0);" class="tablelink del" data-value="DelFriendLinkInfo">刪除</a>
+                            </td>
+                       </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="pagin">
+            @Model.Pagination.AdminPagingHtml()
+        </div>
+    </div>
+</div>

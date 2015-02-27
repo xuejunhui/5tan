@@ -1,0 +1,208 @@
+﻿@model RegionModel
+@{
+    ViewBag.Title = Model.CurrentCategory.CategoryName;
+}
+@section Css{
+    <link href="@Url.Content("~/Content/Region.css")" rel="stylesheet" type="text/css" />
+}
+@section Js{
+    <script type="text/javascript">
+        jQuery(".ranking").slide({ titCell: ".hd li", mainCell: ".bd", delayTime: 0 });
+    </script>
+}
+<div  id="wp" class="wp j_wp">
+    @Html.Partial("_Nav", Model.CategoryNav)
+    <div id="ct" class="ct2 wp cl">
+        <div class="mn animated fadeInUp">
+            <div id="select" class="m">
+                <div class="mt">
+                    <h1>
+                    @(Model.CurrentCategory.CategoryName)旅游 -
+                    <strong> 信息筛选</strong>
+                    </h1>
+                </div>
+                <div class="mc attrs">
+                    <div class="brand-attr">
+                        <div class="attr">
+                            <div class="a-key">范围：</div>
+                            <div class="a-values">
+                                <div class="v-fold">
+                                    <ul class="f-list">
+                                        <li @(Model.Range.IsNullOrEmpty() ? "class=hover" : "")><a href="@URLUtility.CategoryUrl(Model.CurrentCategory.AutoKey, Model.CurrentCategory.SEOURL, Model.Days, Model.Traffic, "")">不限</a></li>
+                                        @foreach (var item in Model.CategoryChilds)
+                                        {
+                                            if (item["childscount"].ToInt32Value() > 0)
+                                            {
+                                                <li><a href="@URLUtility.CategoryUrl(item.AutoKey, item.SEOURL, Model.Days, Model.Traffic, "")">@item.CategoryName</a></li>
+                                            }
+                                            else
+                                            { 
+                                                <li @(Model.Range.Equals(item.CategoryName) ? "class=hover" : "")><a href="@URLUtility.CategoryUrl(Model.CurrentCategory.AutoKey, Model.CurrentCategory.SEOURL, Model.Days, Model.Traffic, item.CategoryName)">@item.CategoryName</a></li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="attr">
+                            <div class="a-key">天数：</div>
+                            <div class="a-values">
+                                <div class="v-fold">
+                                    <ul class="f-list">
+                                        <li @(Model.Days.IsNullOrEmpty() ? "class=hover" : "")><a href="@URLUtility.CategoryUrl(Model.CurrentCategory.AutoKey, Model.CurrentCategory.SEOURL, "", Model.Traffic, Model.Range)">不限</a></li>
+                                        @foreach (var item in Model.DaysChilds)
+                                        { 
+                                            <li @(Model.Days.Equals(item.CategoryName) ? "class=hover" : "")><a href="@URLUtility.CategoryUrl(Model.CurrentCategory.AutoKey, Model.CurrentCategory.SEOURL, item.CategoryName, Model.Traffic, Model.Range)">@item.CategoryName</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="attr">
+                            <div class="a-key">交通：</div>
+                            <div class="a-values">
+                                <div class="v-fold">
+                                    <ul class="f-list">
+                                        <li @(Model.Traffic.IsNullOrEmpty() ? "class=hover" : "")><a href="@URLUtility.CategoryUrl(Model.CurrentCategory.AutoKey, Model.CurrentCategory.SEOURL, Model.Days, "", Model.Range)">不限</a></li>
+                                        @foreach (var item in Model.TrafficChilds)
+                                        { 
+                                            <li @(Model.Traffic.Equals(item.CategoryName) ? "class=hover" : "")><a href="@URLUtility.CategoryUrl(Model.CurrentCategory.AutoKey, Model.CurrentCategory.SEOURL, Model.Days, item.CategoryName, Model.Range)">@item.CategoryName</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="lessProp" class="mb"></div>
+            </div>
+            <!--内容列表-->
+            <div class="bm">
+                <div class="portal-hd cl">
+                    <h2>@(Model.CurrentCategory.CategoryName)旅游列表</h2>
+                </div>
+                <ul class="pic-list cl animated fadeInUp">
+                    @foreach (var item in Model.SearchModel.DataList)
+                    { 
+                        <li class="photo-big">
+                            <div class="photo-pic">
+                                <a href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)">
+                                    <img width="330" height="220" alt="@item.Title" src="@item.PreviewIMG.GetSmallUrl()"/>
+                                </a>
+                                <a class="mask" title="@item.Title" href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)"></a>
+                            </div>
+                            <h3><a class="link" style="" href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)">@item.Title</a></h3>
+                            <div class="meta">
+                                <span class="meta-column">
+                                <i></i>
+                                <span class="meta-data">@item["CategoryName"]</span>
+                                </span>
+                                <span class="delim"></span>
+                                <span class="meta-data">@item.TravelingDays</span>
+                                <span class="delim"></span>
+                                <span class="meta-data price">￥@item.Price.ToPrice()</span>
+                            </div>
+                            <p>@item.Description.DisplayByMaxLength(80)</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!--分页-->
+            <div class="pagin">
+                @Model.SearchModel.Pagination.AdminPagingHtml()
+            </div>
+        </div>
+        <div class="sd pph">
+            <!--关注我们-->
+            @Html.Partial("_AdsContent", AdsPos.AdsMainContact)
+
+            <!--排行榜-->
+            <div class="ranking mt20">
+            <div class="hd">
+                <div id="ranking-t" class="area">
+                    <ul>
+                        <li class="on">推荐排行</li>
+                        <li>票务预定</li>
+                        <li>旅游签证</li>
+                        </ul>
+                </div>
+            </div>
+            <div class="bd">
+                <ul class="top10">
+                    @for (int i = 1; i <= Model.RelatedContent.Count(); i++)
+                    { 
+                        var item = Model.RelatedContent[i - 1];
+                        <li @(i < 4 ? "class=top" : "")>
+                            <span class="price">￥@item.Price.ToPrice()</span>
+                            <span class="num">@i</span>
+                            <a href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)" title="@item.Title" >@item.Shorttitle</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="top10" style="display:none;">
+                    @for (int i = 1; i <= Model.TopTickets.Count(); i++)
+                    {
+                        var item = Model.TopTickets[i - 1];
+                        <li @(i < 4 ? "class=top" : "")>
+                            <span class="price">￥@item.Price.ToPrice()</span>
+                            <span class="num">@i</span>
+                            <a href="@URLUtility.TicketDetailUrl(item.AutoKey)" title="@item.VName">@item.VName.DisplayByMaxLength(10)</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="top10" style="display:none;">
+                     @for (int i = 1; i <= Model.TopVisas.Count(); i++)
+                    {
+                        var item = Model.TopVisas[i - 1];
+                        <li @(i < 4 ? "class=top" : "")>
+                            <span class="price">￥@item.Price.ToPrice()</span>
+                            <span class="num">@i</span>
+                            <a href="@URLUtility.VisaDetailUrl(item.AutoKey)" title="@item.VName">@item.VName.DisplayByMaxLength(10)</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+
+            <!--旅游攻略-->
+        <div class="new-article">
+            <div class="portal-hd">
+                <div id="new-article-t" class="area">
+                    <h2>景点指南</h2>
+                </div>
+            </div>
+            <div class="bd">
+                <div id="new-article-c" class="area">
+                    <script type="text/javascript">
+                        var sogou_ad_id = 396822;
+                        var sogou_ad_height = 250;
+                        var sogou_ad_width = 250;
+                        </script>
+                        <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+                     <script type="text/javascript">
+                         var sogou_ad_id = 396823;
+                         var sogou_ad_height = 60;
+                         var sogou_ad_width = 234;
+                            </script>
+                            <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+                    <ul>
+                        @foreach (var item in Model.RelatedGuide)
+                        { 
+                            <li>
+                                <h3>
+                                    <a class="link" title="@item.GuideName" href="@URLUtility.GuideDetailUrl(item.AutoKey)">@item.GuideName.DisplayByMaxLength(20)</a>
+                                </h3>
+                                <p>
+                                <i class="quote"></i>
+                                   @item.Description.DisplayByMaxLength(30)
+                                </p>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

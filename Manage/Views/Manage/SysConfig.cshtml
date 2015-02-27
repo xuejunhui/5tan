@@ -1,0 +1,36 @@
+﻿@model SysConfigModel
+
+<div class="place">
+<span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/1")'>网站设置</a></li>
+        <li><a href="javascript:void(0);">网站基本配置</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div class="formtitle"><span>网站基本配置</span></div>
+    @if (Model.Msg != null)
+    {  
+        <div class="formtext" id="msgInfo">@Model.Msg.GetMessageInfo()</div>
+    }
+    @using (Html.BeginForm("SysConfig", "Manage", FormMethod.Post))
+    {
+        <ul class="forminfo">
+            <li><label>网站名称</label>@Html.TextBoxFor(s => s.Sys_Value.WebName, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.WebName)</i></li>
+            <li><label>网站域名</label>@Html.TextBoxFor(s => s.Sys_Value.DomainUrl, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.DomainUrl)</i></li>
+            <li><label>网站标题</label>@Html.TextBoxFor(s => s.Sys_Value.Title, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.Title)</i></li>
+            <li><label>网站关键字</label>@Html.TextBoxFor(s => s.Sys_Value.Keyword, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.Keyword)</i></li>
+            <li><label>网站描述</label>@Html.TextAreaFor(s => s.Sys_Value.Description, new { @class = "textinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.Description)</i></li>
+            <li><label>网站联系人</label>@Html.TextBoxFor(s => s.Sys_Value.ConcactName, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.ConcactName)</i></li>
+            <li><label>联系人手机</label>@Html.TextBoxFor(s => s.Sys_Value.Phone, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.Phone)</i></li>
+            <li><label>联系人座机</label>@Html.TextBoxFor(s => s.Sys_Value.Telephone, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.Telephone)</i></li>
+            <li><label>在线联系QQ号</label>@Html.TextBoxFor(s => s.Sys_Value.QQ, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.QQ)</i></li>
+            <li><label>旅行社地址</label>@Html.TextBoxFor(s => s.Sys_Value.Address, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.Address)</i></li>
+            <li><label>许可证编号</label>@Html.TextBoxFor(s => s.Sys_Value.LicenseNumber, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.LicenseNumber)</i></li>
+            <li><label>注册号</label>@Html.TextBoxFor(s => s.Sys_Value.RegistrationNumber, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.RegistrationNumber)</i></li>
+            <li><label>网站备案</label>@Html.TextBoxFor(s => s.Sys_Value.BeiAn, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.BeiAn)</i></li>
+            <li><label>网站版权</label>@Html.TextBoxFor(s => s.Sys_Value.Copyright, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Sys_Value.Copyright)</i></li>
+            <li><label>&nbsp;</label>@Html.HiddenFor(s => s.AutoKey)@Html.HiddenFor(s=>s.WebName) <input name="" type="submit" class="btn" value="确认保存"/></li>
+        </ul>
+    }
+</div>

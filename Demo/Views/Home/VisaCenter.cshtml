@@ -1,0 +1,129 @@
+﻿@model VisaCenterModel
+@{
+    ViewBag.Title = Model.VisaCenter.CategoryName;
+    ViewBag.Keywords = Model.VisaCenter.KeyWord;
+    ViewBag.Description = Model.VisaCenter.Description;
+}
+@section Css{
+    <link href="@Url.Content("~/Content/GuideDetail.css")" rel="stylesheet" type="text/css" />
+}
+<div  id="wp" class="wp j_wp">
+    <div id="pt" class="bm cl">
+        <div class="z">
+            <a class="nvhm" title="网站首页" href="/">@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName</a>
+            <em>›</em>
+            <a href="@URLUtility.VisaCenterUrl()">@Model.VisaCenter.CategoryName</a>
+        </div>
+    </div>
+    <div class="ct2 wp cl">
+        <div class="map">
+            <div class="map_left">
+                <div class="map_title"> 签证中心</div>
+            </div>
+            <div class="map_right">
+                <dl>
+                    <dt>
+                    <img width="21" height="47" src="@Url.Content("/Content/detail/icon1.jpg")"/>
+                    </dt>
+                    @Html.Partial("_AdsContent", AdsPos.VisaCenterYaZhou)
+                </dl>
+                <dl>
+                    <dt>
+                    <img width="21" height="47" src="@Url.Content("/Content/detail/icon2.jpg")"/>
+                    </dt>
+                    @Html.Partial("_AdsContent", AdsPos.VisaCenterFeiZhou)
+                </dl>
+                <dl>
+                    <dt>
+                    <img width="21" height="47" src="@Url.Content("/Content/detail/icon3.jpg")"/>
+                    </dt>
+                    @Html.Partial("_AdsContent", AdsPos.VisaCenterOuZhou)
+                </dl>
+                <dl>
+                    <dt>
+                    <img width="21" height="47" src="@Url.Content("/Content/detail/icon4.jpg")"/>
+                    </dt>
+                    @Html.Partial("_AdsContent", AdsPos.VisaCenterMeiZhou)
+                </dl>
+                <dl>
+                    <dt>
+                    <img width="21" height="47" src="@Url.Content("/Content/detail/icon5.jpg")"/>
+                    </dt>
+                    @Html.Partial("_AdsContent", AdsPos.VisaCenterTaiPingYang)
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="ct2 wp cl mt20">
+        <div class="mn animated fadeInUp">
+            <div class="Visa_Flow">
+                <div class="Flow_Title"> 签证办理流程</div>
+                <div class="Flow_Img">
+                    <img width="619" height="95" src="@Url.Content("~/Content/detail/flow.jpg")">
+                </div>
+            </div>
+            @foreach (var item in Model.VisaCategory)
+            {
+                var visalist = Model.VisaList.Where(s => s.CategoryID == item.AutoKey);
+                if (visalist.Count() > 0)
+                {
+                <div class="cl">
+                    <div class="portal-hd">
+                        <div id="all-pic-t" class="area">
+                            <h2>@item.CategoryName</h2>
+                        </div>
+                    </div>
+                    <div class="index_link">
+                        <div id="index_link" class="area">
+                            <ul class="cl">
+                                @foreach(var visa in visalist)
+                                {
+                                    <li>
+                                        <a title="@visa.VName" href="@URLUtility.VisaDetailUrl(visa.AutoKey)">@visa.VName</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+        </div>
+        <div class="sd pph">
+            @Html.Partial("_AdsContent", AdsPos.AdsMainContact)
+            <div id="new-article-t" class="new-article">
+                <div class="portal-hd">
+                    <div class="area">
+                        <h2>签证常见问题？</h2>
+                        <a class="more" href="@URLUtility.VisaQuestionUrl()">更多</a>
+                    </div>
+                </div>
+                <div class="bd">
+                     <div id="new-article-c" class="area">
+                         <script type="text/javascript">
+                             var sogou_ad_id = 396822;
+                             var sogou_ad_height = 250;
+                             var sogou_ad_width = 250;
+                        </script>
+                        <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+                        <ul>
+                            @foreach (var item in Model.VisaQuestion)
+                            {
+                            <li>
+                                <h3>
+                                    <a title="@item.SC_Name" href="@URLUtility.VisaQuestionDetailUrl(item.AutoKey, item.SEOURL)">@item.SC_Name</a>
+                                </h3>
+                                <p>
+                                <i class="quote"></i>
+                                    @item.Description.DisplayByMaxLength(35)
+                                </p>
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

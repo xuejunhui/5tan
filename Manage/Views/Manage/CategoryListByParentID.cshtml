@@ -1,0 +1,79 @@
+﻿@model CategoryViewData
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/2")'>系统分类</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/Category/@Model.Menu.ID")'>@Model.Menu.MenuName</a></li>
+        @foreach (var item in Model.Nav)
+        { 
+           @:<li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/CategoryListByParentID?parentid=@item.AutoKey&id=@Model.Menu.ID")')'>@item.CategoryName</a></li>
+        }
+    </ul>
+</div>
+<div class="formbody">
+    <div class="tabson">
+            @using (Html.BeginForm("CategoryListByParentID", "Manage", new { parentid = Model.CurrentCategoryID, id = Model.Menu.ID }, FormMethod.Get))
+            {
+                <ul class="seachform">
+                    <li><label>当前列表查询</label>
+                        <input name="parentid" value="@Model.CurrentCategoryID" type="hidden"/>
+                        <input name="id" value="@Model.Menu.ID" type="hidden"/>
+                        @Html.TextBoxFor(s => s.Keyword, new { @class = "scinput" })
+                    </li>
+                    <li><label>&nbsp;</label><input type="submit" class="scbtn" value="查詢"/></li>
+                </ul>
+            }
+            <ul class="toolbar">
+                @if (!string.IsNullOrEmpty(Model.Keyword))
+                { 
+                    <li onclick='showJumpBox("/Manage/CategoryListByParentID?parentid=@Model.CurrentCategoryID&id=@Model.Menu.ID")'><span><img src="/content/account/t04.png" /></span>清除查詢</li>
+                }
+                <li onclick='showJumpBox("/Manage/EditCategory?autokey=0&parentid=@Model.CurrentCategoryID&menuid=@Model.Menu.ID")'><span><img src="/content/account/t01.png" /></span>新增分类</li>
+                <li id="BulkDelete" data-value="DelCategory"><span><img src="/content/account/t03.png" /></span>批量刪除</li>
+            </ul>
+    </div>
+    <table class="tablelist">
+    	<thead>
+    	    <tr>
+                <th width="50"><input id="cball" type="checkbox" /></th>
+                <th width="150">分类名</th>
+                <th width="100">分类SEO</th>
+                <th>描述</th>
+                <th width="100">下级分类数</th>
+                <th width="200">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Data)
+            { 
+                <tr>
+                    <td>
+                        @if (item["childscount"].ToInt32Value() == 0)
+                        { 
+                            <input name="cbno" type="checkbox" value="@item.AutoKey" />
+                        }
+                    </td>
+                    <td>@item.CategoryName</td>
+                    <td>@item.SEOURL</td>
+                    <td>@item.Description</td>
+                    <td>@item["childscount"]</td>
+                    <td>
+                        <a href="/Manage/EditCategory?autokey=@item.AutoKey&parentid=@item.ParentID&menuid=@Model.Menu.ID" class="tablelink">编辑</a>
+                        @if (item["childscount"].ToInt32Value() > 0)
+                        {
+                            <a href="/Manage/CategoryListByParentID?parentid=@item.AutoKey&id=@Model.Menu.ID" class="tablelink">下级分类</a>
+                        }
+                        else
+                        { 
+                            <a href="/Manage/EditCategory?autokey=0&parentid=@item.AutoKey&menuid=@Model.Menu.ID" class="tablelink">新增下级分类</a>
+                            <a href="javascript:void(0);" data-value="DelCategory" class="tablelink del">删除分类</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagin">
+        @Model.Pagination.AdminPagingHtml()
+    </div>
+</div>

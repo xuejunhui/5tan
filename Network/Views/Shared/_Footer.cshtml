@@ -1,0 +1,28 @@
+﻿<div class="container footer">
+    <div class="row font_size11 copyright">
+        <span class="left">Copyright @DateTime.Now.Year www.5tan.net All Rights Reserved.</span>
+        <span class="right"> 版权所有：<strong><a href="http://www.5tan.net">捂碳网络工作室</a></strong></span>
+    </div>
+    @if(ViewBag.ShowLinks != null && ViewBag.ShowLinks)
+    {
+        List<FriendLinkTB> list = CurrentBLL.FBLL.GetFriendLinks(WebName.NetWork);
+        <div class="row">
+            <img width="1000" height="1" src="/Upload/copyRightLine.jpg">
+        </div>
+        if (list != null && list.Count()>0)
+        {
+            <div class="row links">
+                <h2 class="left">
+                    友情链接
+                    <strong>Links</strong>
+                </h2>
+                <p class="left">
+                    @foreach (var item in list)
+                    {
+                        <a target="_blank" href="@item.LinkUrl">@item.LinkName</a>      
+                    }
+                </p>
+            </div>
+        }
+    }
+</div>

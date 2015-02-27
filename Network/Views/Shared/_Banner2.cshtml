@@ -1,0 +1,26 @@
+﻿@model NavModel
+<div class="sonBanner wa pr">
+  <div class="banner_content_01">
+    <div class="row"><img src="@Url.Content("~/Upload/banner1.jpg")" height="300" /></div>
+  </div>
+  <div class="mbx">
+    <div class="mbxContent right pr">
+      <div class="wa mbxMk"></div>
+        <span class="showPath1">位置&#160;:&#160;</span> 
+        @for (int i = Model.NavsCount - 1; i >= 0;i-- )
+        {
+            
+            var item = Model.Navs[i];
+            <span class="showPath@(Model.NavsCount-i)">@(i < Model.NavsCount - 1 ? "/" : "") <a href="@item.NavUrl" >@item.NavName</a></span> 
+        }
+        
+    </div>
+    <div class="mbxCorner right"><img class="png" src="@Url.Content("~/Content/network/mbxLeft3.png")" width="60" height="60" /></div>
+  </div>
+  <div class="mbx2">
+    <div class="mbxContent2 right pr">
+      <div class="wa mbxMk2"></div>
+      <span class="showPath2">咨询:@ConfigBLL.CurrentNetWorkSysConfigInfo.Sys_Value.Phone</span> </div>
+    <div class="mbxCorner2 right"><img class="png" src="@Url.Content("~/Content/network/mbxLeft2.png")" width="21" height="40" /></div>
+  </div>
+</div>

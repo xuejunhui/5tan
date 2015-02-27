@@ -1,0 +1,173 @@
+﻿@model GuideCenterModel
+@{
+    ViewBag.Title = Model.CurrentCategory.CategoryName + "|目的地指南";
+    ViewBag.Keywords = Model.CurrentCategory.KeyWord;
+    ViewBag.Description = Model.CurrentCategory.Description;
+}
+@section Css{
+    <link href="@Url.Content("~/Content/Region.css")" rel="stylesheet" type="text/css" />
+    
+    <style type="text/css">
+        @if(Model.CurrentCategory.ParentID==0)
+        {
+            @:.v-fold .f-list li
+            @:{
+            @:    width: auto;
+            @:}
+        }
+        
+        .pic-list li,.pic-list .photo-big p
+        {
+            height:auto;
+        }
+    </style>
+}
+@section Js{
+    <script type="text/javascript">
+        jQuery(".ranking").slide({ titCell: ".hd li", mainCell: ".bd", delayTime: 0 });
+    </script>
+}
+<div id="ct" class="ct2 wp cl">
+    @Html.Partial("_GuideNav", Model.CategoryNav)
+    <div class="mn animated fadeInUp">
+        <div id="select" class="m">
+            <div class="mt">
+                <h1>
+                    目的地指南 - <strong>信息筛选</strong>
+                </h1>
+            </div>
+            <div class="mc attrs">
+                <div class="brand-attr">
+                    <div class="attr">
+                        <div class="a-key">
+                            范围：</div>
+                        <div class="a-values">
+                            <div class="v-fold">
+                                <ul class="f-list">
+                                    <li @(Model.SearchModel.Range.Equals(Model.CurrentCategory.CategoryName) ? "class=hover" : "")><a href="@URLUtility.GuideCenterUrl(Model.CurrentCategory.AutoKey, "")">
+                                        不限</a></li>
+                                    @foreach (var item in Model.Ranges)
+                                    {
+                                        if (item["childscount"].ToInt32Value() > 0)
+                                        {
+                                            <li><a href="@URLUtility.GuideCenterUrl(item.AutoKey, "")">@item.CategoryName</a></li>
+                                        }
+                                        else
+                                        { 
+                                            <li @(Model.SearchModel.Range.Equals(item.CategoryName) ? "class=hover" : "")><a href="@URLUtility.GuideCenterUrl(Model.CurrentCategory.AutoKey, item.CategoryName)">@item.CategoryName</a></li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="lessProp" class="mb"></div>
+        </div>
+         <!--内容列表-->
+            <div class="bm">
+                <div class="portal-hd cl">
+                    <h2>@(Model.CurrentCategory.CategoryName)指南列表</h2>
+                </div>
+                <ul class="pic-list cl animated fadeInUp">
+                    @foreach (var item in Model.SearchModel.DataList)
+                    { 
+                        <li class="photo-big">
+                            <h3><a class="link" style="" href="@URLUtility.GuideDetailUrl(item.AutoKey)">@item.GuideName</a></h3>
+                            <div class="meta">
+                                <span class="meta-column">
+                                <i></i>
+                                <span class="meta-data">@item["CategoryName"]</span>
+                                </span>
+                                <span class="delim"></span>
+                                <span class="meta-data">@String.Format("{0:yyyy-MM-dd HH:ss}",item.CreateTime)</span>
+                                <span class="delim"></span>
+                                <span class="meta-data"><a href="@URLUtility.SummerDetailUrl(item["CAutokey"].ToInt32Value(),item["seourl"].ToEmptyTrimString())" title="@item["Title"]">@item["Shorttitle"]</a></span>
+                            </div>
+                            <a href="@URLUtility.GuideDetailUrl(item.AutoKey)" title="@item.GuideName">
+                                @Html.Action("LoadRelatedImg", new { guid = @item.GUID })
+                                <p>@item.Description.DisplayByMaxLength(80)</p>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!--分页-->
+            <div class="pagin">
+                @Model.SearchModel.Pagination.AdminPagingHtml()
+            </div>
+    </div>
+    <div class="sd pph">
+        <div class="mt20">
+                <div class="portal-hd">
+                    <div id="new-visa-t" class="area">
+                        <h2>相关旅游推荐</h2>
+                    </div>
+                </div>
+                <div class="bd">
+                    <div class="photo-small">
+                        <div id="photo-small-l" class="area">
+                             <script type="text/javascript">
+                                 var sogou_ad_id = 396823;
+                                 var sogou_ad_height = 60;
+                                 var sogou_ad_width = 234;
+                            </script>
+                            <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+
+                            <ul>
+                                @foreach (var item in Model.RelatedContent)
+                                {
+                                    <li>
+                                        <div class="photo-pic">
+                                        <a target="_blank" title="@item.Title" href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)">
+                                            <img width="100" height="75" alt="@item.Title" src="@item.PreviewIMG.GetSmallUrl()"/>
+                                        </a>
+                                        </div>
+                                        <h3>
+                                        <a class="link" target="_blank" title="@item.Title" href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)">@item.Shorttitle</a>
+                                        </h3>
+                                        <p title="@item.Description">@item.Description.DisplayByMaxLength(20)</p>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+
+        <div id="new-article-t" class="new-article">
+                <div class="portal-hd">
+                    <div class="area">
+                        <h2>相关推荐景点</h2>
+                    </div>
+                </div>
+                <div class="bd">
+                     <div id="new-article-c" class="area">
+                         <script type="text/javascript">
+                             var sogou_ad_id = 396822;
+                             var sogou_ad_height = 250;
+                             var sogou_ad_width = 250;
+                            </script>
+                        <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+                        <ul>
+                            @foreach (var item in Model.RelatedGuides)
+                            {
+                            <li>
+                                <h3>
+                                    <a class="link" target="_blank" title="@item.GuideName" href="@URLUtility.GuideDetailUrl(item.AutoKey)">@item.GuideName</a>
+                                </h3>
+                                <p>
+                                <i class="quote"></i>
+                                    @item.Description.DisplayByMaxLength(35)
+                                </p>
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+    </div>
+</div>

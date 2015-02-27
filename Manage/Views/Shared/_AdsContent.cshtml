@@ -1,0 +1,178 @@
+﻿@model AdsPos
+@{
+    ConfigBLL bll = new ConfigBLL();    
+}
+@if (Model == AdsPos.AdsMainContact)
+{ 
+    <div class="web-info">
+        <div class="portal-hd">
+            <div id="web-info-t" class="area">
+                <h2>联系我们</h2>
+            </div>
+        </div>
+        <div class="bd">
+            <div id="web-info" class="area">
+                @foreach (var item in bll.GetAdsConfigs(Model))
+                {
+                    AdsConfigModel ads = new AdsConfigModel();
+                    ads.BindModelData(item);
+                    if (ads.Sys_Value.Link.IsNullOrEmpty())
+                    {
+                        <img width="280" height="129" alt="@(ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName)-联系我们" src="@(ads.Sys_Value.LinkContent)"/>
+                    }
+                    else
+                    { 
+                        <a href="@ads.Sys_Value.Link" title="@ads.Sys_Value.LinkName">
+                            <img  width="280" height="129" alt="@(ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName)-联系我们" src="@(ads.Sys_Value.LinkContent)"/>
+                        </a>    
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}
+else if (Model == AdsPos.VisaCenterFeiZhou || Model == AdsPos.VisaCenterMeiZhou || Model == AdsPos.VisaCenterOuZhou || Model == AdsPos.VisaCenterTaiPingYang || Model == AdsPos.VisaCenterYaZhou)
+{
+    var data = bll.GetAdsConfigs(Model);
+    if (data != null)
+    {
+        if (data.Count() > 0)
+        {
+            AdsConfigModel ads = new AdsConfigModel();
+            ads.BindModelData(data[0]);
+            <dd class="bigFont">
+                <a target="_blank" href="@ads.Sys_Value.Link.ToLink()" title="@ads.Sys_Value.LinkContent">@ads.Sys_Value.LinkContent.DisplayByMaxLength(20)</a>
+            </dd>
+            if (data.Count() > 1)
+            { 
+                <dd>
+                    @for(int i=1;i<data.Count();i++)
+                    {
+                        ads.BindModelData(data[i]);
+                        @:[<a target="_blank" href="@ads.Sys_Value.Link.ToLink()" title="@ads.Sys_Value.LinkContent">@ads.Sys_Value.LinkContent.DisplayByMaxLength(10)</a>]
+                    }
+                </dd>
+            }
+        }
+    }
+}
+else if (Model == AdsPos.MainTopScroll)
+{
+    var data = bll.GetAdsConfigs(Model);
+    if (data != null && data.Count() > 0)
+    {
+        <div class="jeavi_con cl">
+            <div id="scrolldiv">
+                <!--[diy=diyscrolldiv]-->
+                <div id="diyscrolldiv" class="area">
+                    <div id="framewcx0ZI" class="frame move-span cl frame-1">
+                        <div id="framewcx0ZI_left" class="column frame-1-c">
+                            <div id="framewcx0ZI_left_temp" class="move-span temp">
+                            </div>
+                            <div id="portal_block_198" class="block move-span">
+                                <div id="portal_block_198_content" class="dxb_bc">
+                                    <div class="bd">
+                                        <ul>
+                                            @foreach(var item in data)
+                                            {
+                                                AdsConfigModel ads = new AdsConfigModel();
+                                                ads.BindModelData(item);
+                                                <li><a href="@ads.Sys_Value.Link" title="@ads.Sys_Value.LinkContent" target="_blank">@ads.Sys_Value.LinkContent</a></li>
+                                            }
+                                         </ul>
+                                    </div>
+                                    <ul class="ticker">
+                                        <li class="prev"><a href="javascript:void(0)"></a></li>
+                                        <li class="next" style="float: left;"><a href="javascript:void(0)"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--[/diy]-->
+            </div>
+        </div>
+ 
+         <script type="text/javascript">
+             jQuery("#scrolldiv").slide({ mainCell: ".bd ul", autoPage: true, effect: "leftLoop", autoPlay: true, delayTime: 500 });
+         </script>
+    }
+}
+else if (Model == AdsPos.AdsMainSlide)
+{ 
+
+    var data = bll.GetAdsConfigs(Model);
+    if (data != null && data.Count() > 0)
+    {
+        int index = 1;
+        <div class="focus_bg">
+            <div class="jeavi_con cl">
+                <!-- 幻灯 -->
+                <div class="focus_box">
+                    <!--[diy=focus_box]-->
+                    <div id="focus_box" class="area">
+                            <div class="bd">
+                                <ul>
+                                    @foreach(var item in data)
+                                    {
+                                        AdsConfigModel ads = new AdsConfigModel();
+                                        ads.BindModelData(item);
+                                        <li>
+                                            <div class="img-con">
+                                                <a href="@ads.Sys_Value.Link.ToLink()" target="_blank" title="@ads.Sys_Value.LinkName">
+                                                    <img src="@ads.Sys_Value.LinkContent" width="600" height="336" alt="@ads.Sys_Value.LinkName"/>
+                                                </a>
+                                            </div>
+                                            <div class="txt">
+                                                <div class="caption_info">
+                                                    <span class="num">0@(index)</span> <span class="author">@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName</span>
+                                                </div>
+                                                <h2>
+                                                    <a href="@ads.Sys_Value.Link.ToLink()" target="_blank" title="@ads.Sys_Value.LinkName">@ads.Sys_Value.LinkName</a></h2>
+                                                <p title="@ads.Sys_Value.LinkDesc">
+                                                    @ads.Sys_Value.LinkDesc.DisplayByMaxLength(80)
+                                                </p>
+                                                <a href="@ads.Sys_Value.Link.ToLink()" target="_blank" title="@ads.Sys_Value.LinkName" class="read-more">Read More &#187;</a>
+                                            </div>
+                                        </li>
+                                        index++;
+                                    }
+                                </ul>
+                            </div>
+                            <div class="btn">
+                                <a href="javascript:void(0)" class="next">> </a>
+                                <a href="javascript:void(0)" class="prev"> < </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    }
+
+}
+else if (AdsPos.AdsMainBanner1 == Model || Model == AdsPos.AdsMainBanner2)
+{
+    var data = bll.GetAdsConfigs(Model);
+     <div class="mb20">
+        <div id="l-ad" class="area">
+            <div class="portal_block_summary">
+            @if (data != null && data.Count() > 0)
+            {
+                AdsConfigModel ads = new AdsConfigModel();
+                ads.BindModelData(data.FirstOrDefault());
+                if (ads.Sys_Value.Link.IsNullOrEmpty())
+                {
+                    <img width="680" height="100" alt="@ads.Sys_Value.LinkName" src="@ads.Sys_Value.LinkContent"/>
+                }
+                else
+                {
+                <a target="_blank" href="@ads.Sys_Value.Link.ToLink()" title="@ads.Sys_Value.LinkName">
+                    <img width="680" height="100" alt="@ads.Sys_Value.LinkName" src="@ads.Sys_Value.LinkContent"/>
+                </a>
+                }
+            }
+            </div>
+        </div>
+    </div>
+}

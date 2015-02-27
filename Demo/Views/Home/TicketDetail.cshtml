@@ -1,0 +1,72 @@
+﻿@model VisaDetailModel
+@{
+    ViewBag.Title = Model.VisaDetail.VName;
+    ViewBag.Keywords = Model.VisaDetail.KeyWord;
+    ViewBag.Description = Model.VisaDetail.Description;
+}
+@section Css{
+    <link href="@Url.Content("~/Content/GuideDetail.css")" rel="stylesheet" type="text/css" />
+}
+<div  id="wp" class="wp j_wp">
+    <div id="pt" class="bm cl">
+        <div class="z">
+            <a class="nvhm" title="网站首页" href="/">@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName</a>
+            <em>›</em>
+            <a href="@URLUtility.TicketCenterUrl()">票务预订</a>
+            <em>›</em>
+            <a href="javascript:void(0);">@Model.VisaDetail.VName</a>
+        </div>
+    </div>
+    <div id="ct" class="ct2 wp cl">
+        <div class="mn animated fadeInUp">
+            <div class="h hm">
+                <h1 class="ph">@Model.VisaDetail.VName</h1>
+                <p class="xg1">
+                     发布时间:
+                    <em >@String.Format("{0:yyyy-MM-dd HH:mm}", Model.VisaDetail.CreateTime)</em>
+                     购票价格:
+                    <em class="price">￥@Model.VisaDetail.Price.ToPrice()</em>
+                </p>
+            </div>
+            <div id="diysummarytop" class="area"></div>
+            <div class="s">
+                <div>
+                    <strong>简介：</strong>
+                    @Model.VisaDetail.Description
+                </div>
+            </div>
+            <div class="d">
+                @Html.Raw(Model.VisaDetail.VContent)
+            </div>
+        </div>
+        <div class="sd pph">
+            <div class="mt20">
+                <div class="portal-hd">
+                    <div id="new-visa-t" class="area">
+                        <h2>相关票务</h2>
+                        <a class="more" href="@URLUtility.TicketCenterUrl()">查看所有</a>
+                    </div>
+                </div>
+                <div class="bd">
+                    <script type="text/javascript">
+                        var sogou_ad_id = 396822;
+                        var sogou_ad_height = 250;
+                        var sogou_ad_width = 250;
+                        </script>
+                        <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+                    <ul class="top10">
+                        @foreach (var item in Model.RelatedVisa)
+                        { 
+                            <li>
+                                <span class="price">￥@item.Price.ToPrice()</span>
+                                <a href="@URLUtility.TicketDetailUrl(item.AutoKey)" title="@item.VName" >@item.VName</a>
+                            </li>
+                        }
+                    </ul>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+            @Html.Partial("_AdsContent", AdsPos.AdsMainContact)
+        </div>
+    </div>
+</div>

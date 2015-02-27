@@ -1,0 +1,20 @@
+﻿<!--------------------------------------Banner------------------------------------>
+<div class="Banner container">
+    <div class="bannerLeftBar pa l0 cp"></div>
+    <div class="bannerInner row cl ofh pr">
+        @foreach (var item in CurrentBLL.Config.GetAdsConfigs(AdsNetWorkPos.MainSlideTxt.ToString(), WebName.NetWork))
+        {
+            AdsConfigModel ads = new AdsConfigModel();
+            ads.BindModelData(item);
+            <div data-title="@ads.Sys_Value.LinkName" data-content="@ads.Sys_Value.LinkContent" data-link="@ads.Sys_Value.Link"></div>    
+        }
+        <ul class="bannerControl pa b0 r0">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="bannerRightBar pa r0 cp"></div>
+</div>

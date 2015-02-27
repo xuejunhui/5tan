@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3273E67B-4BFA-46BF-B2BD-7A8409055A67}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WTAN.Model</RootNamespace>
+    <AssemblyName>WTAN.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\XUniversalCMS\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DModel\Account_UsersTB.cs" />
+    <Compile Include="DModel\AdminMenus.cs" />
+    <Compile Include="DModel\CategoryTB.cs" />
+    <Compile Include="DModel\ChildItem.cs" />
+    <Compile Include="DModel\ContentTB.cs" />
+    <Compile Include="DModel\DModelBase.cs" />
+    <Compile Include="DModel\FriendLinkTB.cs" />
+    <Compile Include="DModel\GuideTB.cs" />
+    <Compile Include="DModel\MenuItem.cs" />
+    <Compile Include="DModel\RecordItem.cs" />
+    <Compile Include="DModel\SpecialColumnTB.cs" />
+    <Compile Include="DModel\Sys_ConfigTB.cs" />
+    <Compile Include="DModel\Sys_FilesTB.cs" />
+    <Compile Include="DModel\VisaCenterTB.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VModel\AdsConfigModel.cs" />
+    <Compile Include="VModel\CategoryDropDownBox.cs" />
+    <Compile Include="VModel\CategoryModel.cs" />
+    <Compile Include="VModel\ChangePasswordModel.cs" />
+    <Compile Include="VModel\ConfigXml.cs" />
+    <Compile Include="VModel\ContactModel.cs" />
+    <Compile Include="VModel\ContentModel.cs" />
+    <Compile Include="VModel\FriendLinkModel.cs" />
+    <Compile Include="VModel\GuideCenterModel.cs" />
+    <Compile Include="VModel\GuideDetailModel.cs" />
+    <Compile Include="VModel\GuideModel.cs" />
+    <Compile Include="VModel\IndexModel.cs" />
+    <Compile Include="VModel\LoginModel.cs" />
+    <Compile Include="VModel\Message.cs" />
+    <Compile Include="VModel\RaiderCenterModel.cs" />
+    <Compile Include="VModel\RegionModel.cs" />
+    <Compile Include="VModel\SearchModel.cs" />
+    <Compile Include="VModel\SpecialColumnModel.cs" />
+    <Compile Include="VModel\SummerDetailModel.cs" />
+    <Compile Include="VModel\SysConfigModel.cs" />
+    <Compile Include="VModel\Sys_ConfigModel.cs" />
+    <Compile Include="VModel\Sys_FilesModel.cs" />
+    <Compile Include="VModel\TicketCenterModel.cs" />
+    <Compile Include="VModel\VisaCenterModel.cs" />
+    <Compile Include="VModel\VisaDetailModel.cs" />
+    <Compile Include="VModel\SpecialColumnCenterModel.cs" />
+    <Compile Include="VModel\SpecialColumnDetailModel.cs" />
+    <Compile Include="VModel\VModelBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WTAN.CommonUtility\WTAN.CommonUtility.csproj">
+      <Project>{dd8fb273-f53e-45f1-955c-718653aed5fb}</Project>
+      <Name>WTAN.CommonUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

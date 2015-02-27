@@ -1,0 +1,75 @@
+﻿<div id="headnav">
+    <div id="toptb" class="cl">
+        <div class="wp">
+            <!-- search begin -->
+            <div id="scbar" class="cl">
+            <form id="scbar_form" method="get" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="/Search">
+                <input type="hidden" name="ctype" id="scbar_typevalue" value="search" />
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="scbar_txt_td">
+                            <input type="text" name="keyword" id="scbar_txt" value="请输入搜索内容" autocomplete="off" />
+                        </td>
+                        <td class="scbar_type_td">
+                            <a href="javascript:;" id="scbar_type" class="xg1" onclick="showMenu(this.id)" hidefocus="true">搜索</a>
+                        </td>
+                        <td class="scbar_btn_td">
+                            <button type="submit" id="scbar_btn" sc="1" class="pn pnc" value="true"></button>
+                        </td>
+                    </tr>
+                </table>
+                </form>
+            </div>
+            <ul id="scbar_type_menu" class="p_pop" style="display: none;">
+                <li><a href="javascript:;" rel="all" class="curtype">全部</a></li>
+                <li><a href="javascript:;" rel="Province">省内</a></li>
+                <li><a href="javascript:;" rel="Domestic">国内</a></li>
+                <li><a href="javascript:;" rel="Overseas">境外</a></li>
+                <li><a href="javascript:;" rel="Visa">签证</a></li>
+                <li><a href="javascript:;" rel="Raiders">攻略</a></li>
+                <li><a href="javascript:;" rel="Ticket">票务</a></li>
+                <li><a href="javascript:;" rel="Guide">指南</a></li>
+            </ul>
+            <script type="text/javascript">
+                initSearchmenu('scbar', '');
+            </script>
+            <!-- search end -->
+
+            <div class="userbox">
+                <div class="z contactdiv">
+                    <span class="contact"></span>
+                    @ConfigBLL.CurrentSysConfigInfo.Sys_Value.Telephone，@ConfigBLL.CurrentSysConfigInfo.Sys_Value.Phone
+                </div>
+                <div class="z">
+                    <a href="javascript:;"  onclick="setHomepage(window.location.href);">设为首页</a> 
+                    <a href="/"  onclick="addFavorite(this.href, '@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName');return false;">收藏本站</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="hdr">
+            <div class="wp cl">
+                <!-- 站点LOGO -->
+                <div class="hd_logo">
+                    <a href="/" title="@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName">
+                        <img src="@Url.Content("~/Upload/Web/logo.png")" alt="@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName" border="0" />
+                    </a>
+                </div>
+                <div class="nav">
+                    <ul>
+                        <li @*class="a" *@id="mn_portal"><a href="/" hidefocus="true" title="Portal">首页<span>Portal</span></a></li>
+                        <li id="mn_P1"><a href="@URLUtility.CategoryUrl(0, "Overseas")" hidefocus="true"title="Overseas">港澳台及境外<span>Overseas</span></a></li>
+                        <li id="mn_P4"><a href="@URLUtility.CategoryUrl(0, "Domestic")" hidefocus="true" title="Domestic">国内<span>Domestic</span></a></li>
+                        <li id="mn_F40"><a href="@URLUtility.CategoryUrl(0, "Province")" hidefocus="true" title="Province">省内<span>Province</span></a></li>
+                        <li id="mn_forum"><a href="@URLUtility.VisaCenterUrl()" hidefocus="true" title="Visa">签证<span>Visa</span></a></li>
+                        <li id="mn_forum_10"><a href="@URLUtility.GuideCenterUrl()" hidefocus="true" title="Guide">目的地指南<span>Guide</span></a></li>
+                        <li id="mn_home"><a href="@URLUtility.ContactUrl(0, "ContactUs")" hidefocus="true" title="Contact Us">联系我们<span>Contact Us</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="header_fake" id="header_fake"></div>

@@ -1,0 +1,129 @@
+﻿@model SearchModel<GuideTB>
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/3")'>内容管理</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Content/Guide?webname=@Model.WebName")'>相关内容</a></li>
+        @if (ViewBag.Content != null)
+        {
+            <li><a href="javascript:void(0);">@(((ContentTB)ViewBag.Content).Title) 目的地指南</a></li>
+        }
+    </ul>
+</div>
+<div class="formbody">
+    <div id="usual1" class="usual"> 
+        <div class="tools">
+            @using (Html.BeginForm("Guide", "Content", FormMethod.Get))
+            {
+                <ul class="seachform">
+                    <li>
+                        <label>审核</label>
+                        <div class="cityleft">
+                            @Html.DropDownListFor(s => s.IsEnable, new List<SelectListItem> { 
+                                new SelectListItem(){Text="所有",Value=""},
+                                new SelectListItem(){Text="未审核",Value="0"},
+                                new SelectListItem(){Text="已审核",Value="1"}
+                            }, new { @class = "select3" })
+                        </div>
+                    </li>
+                    <li>
+                        <label>置顶状态</label>
+                        <div class="cityleft">
+                            @Html.DropDownListFor(s => s.TopState, new List<SelectListItem> { 
+                                new SelectListItem(){Text="所有",Value=""},
+                                new SelectListItem(){Text="不置顶",Value="0"},
+                                new SelectListItem(){Text="首页置顶",Value="1"},
+                                new SelectListItem(){Text="列表置顶",Value="2"},
+                                new SelectListItem(){Text="全局置顶",Value="3"}
+                            }, new { @class = "select3" })
+                        </div>
+                    </li>
+                    <li>
+                        <label>范围</label>
+                        <div class="cityleft">
+                            @Html.Action("LoadSelectCategoryDropDownBox", "Ajax", new { state = Model.WebName==WebName.Demo? DropDownState.CategoryID:DropDownState.NetworkCategory, value = Model.Range, name = "Range" })
+                        </div>
+                    </li>
+                    <li>
+                        <label></label>
+                    </li>
+                    <li><label>查询</label>
+                        @Html.TextBoxFor(s => s.Keyword, new { @class = "scinput" })
+                        @Html.HiddenFor(s=>s.WebName)
+                        @Html.HiddenFor(s => s.Guid)
+                    </li>
+                    <li><label>&nbsp;</label><input type="submit" class="scbtn" value="查询"/></li>
+                </ul>
+            }
+            </div>
+        <div class="tools">
+            <ul class="toolbar1">
+                <li id="topRecommend3" data-action="SetTopGuide" data-value="3"><span><img alt="" src="/content/account/top.png" /></span>全局置顶</li>
+                <li id="topRecommend2" data-action="SetTopGuide" data-value="2"><span><img alt="" src="/content/account/list_top.png" /></span>列表置顶</li>
+                <li id="topRecommend1" data-action="SetTopGuide" data-value="1"><span><img alt="" src="/content/account/list_top.png" /></span>首页置顶</li>
+                <li id="topRecommend0" data-action="SetTopGuide" data-value="0"><span><img alt="" src="/content/account/arrow_down.png" /></span>取消置顶</li>
+                <li id="setEnableState1" data-action="VerifyGuide" data-value="1"><span><img alt="" src="/content/account/check_list-24.png" /></span>批量审核</li>
+                <li id="setEnableState0" data-action="VerifyGuide" data-value="0"><span><img alt="" src="/content/account/cancelstate.png" /></span>批量取消审核</li>
+                @if (!Model.Guid.IsNullOrEmpty())
+                {
+                    @:<li onclick='showJumpBox("/Content/EditGuide?autokey=0&guid=@Model.Guid&webname=@Model.WebName")'><span><img alt="" src="/content/account/t01.png" /></span>新增相关内容</li>
+                }
+                <li id="BulkDelete" data-value="DelGuideInfo"><span><img alt="" src="/content/account/t03.png" /></span>批量刪除</li>
+                @if (!string.IsNullOrEmpty(Model.Keyword) || !string.IsNullOrEmpty(Model.IsEnable) || !string.IsNullOrEmpty(Model.Range) || !string.IsNullOrEmpty(Model.TopState))
+                { 
+                    <li onclick='showJumpBox("/Content/Guide?webname=@Model.WebName")'><span><img  alt="" src="/content/account/t04.png" /></span>清除查询</li>
+                }
+            </ul>
+        </div>
+        <table class="tablelist">
+    	    <thead>
+    	        <tr>
+                    <th width="50"><input id="cball" type="checkbox" /></th>
+                    <th>所属内容</th>
+                    <th>标题名称</th>
+                    <th>分类</th>
+                    <th width="80">置顶状态</th>
+                    <th width="50">审核</th>
+                    <th width="80">创建时间</th>
+                    <th width="130">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model.DataList)
+                    {
+                       <tr>
+                            <td><input name="cbno" type="checkbox" value="@item.AutoKey" /></td>
+                            <td>@item["Title"].ToEmptyTrimString().DisplayByMaxLength(20)</td>
+                            <td>@item.GuideName.ToEmptyTrimString().DisplayByMaxLength(20)</td>
+                            <td>@item["CategoryName"]</td>
+                            <td>
+                                @switch (item["MainTop"].ToInt32Value())
+                                {
+                                    case 0: @:不置顶 
+                                    break;
+                                    case 2: @:列表置顶 
+                                    break;
+                                    case 1: @:首页置顶 
+                                    break;
+                                    case 3: @:全局置顶 
+                                    break;
+                                }
+                            </td>
+                            <td>@(item.Enable ? "通过" : "未审核")</td>
+                            <td>@String.Format("{0:yyyy-MM-dd}", item.CreateTime)</td>
+                            <td>
+                                <a href="/Content/EditGuide?autokey=@(item.AutoKey)&webname=@Model.WebName" class="tablelink">編輯</a>
+                                <a href="javascript:void(0);" class="tablelink del" data-value="DelGuideInfo">刪除</a>
+                            </td>
+                       </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="pagin">
+            @Model.Pagination.AdminPagingHtml()
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+﻿@model IList<CategoryTB>
+<div class="cityleft">
+    <select id="@ViewBag.Name" name="@ViewBag.Name" class="select2">
+        <option value="">所有</option>
+        @foreach (var item in Model)
+        { 
+            <option value="@item.CategoryName" @(item.CategoryName.Equals(ViewBag.Value) ? "selected=selected" : "")>@item.CategoryName</option>
+        }
+    </select>
+</div>

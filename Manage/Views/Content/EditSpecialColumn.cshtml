@@ -1,0 +1,57 @@
+﻿@model SpecialColumnModel
+<script type="text/javascript" charset="utf-8" src="/UMEditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/UMEditor/ueditor.all.min.js"></script>
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/3")'>内容管理</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Content/@(Model.SCType == SpecialColumnType.AboutUs ? "AboutUs" : Model.SCType == SpecialColumnType.Raiders ? "Raiders" : "VisaQuestion")")'>
+        @if (Model.SCType == SpecialColumnType.VisaQuestion) 
+        { 
+            @:签证常见问题
+        }
+        else if (Model.SCType == SpecialColumnType.AboutUs)
+        { 
+            @:关于我们
+        }
+        else
+        { 
+            @:旅游攻略
+        }
+        </a></li>
+        <li><a href="javascript:void(0);">@(Model.AutoKey == 0 ? "新增内容" : "编辑内容")</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div class="formtitle"><span>@(Model.AutoKey == 0 ? "新增内容" : "编辑内容")</span></div>
+    @if (Model.Msg != null)
+    {  
+        <div class="formtext" id="msgInfo">@Model.Msg.GetMessageInfo()</div>
+    }
+    @using (Html.BeginForm("EditSpecialColumn", "Content", new { }, FormMethod.Post))
+    {
+        @Html.HiddenFor(s => s.AutoKey)
+        @Html.HiddenFor(s => s.GUID)
+        @Html.HiddenFor(s => s.SCType)
+        @Html.HiddenFor(s => s.ParentID)
+        @Html.HiddenFor(s => s.ViewModel)
+        <ul class="forminfo">
+            <li><label>标题名称<b>*</b></label>@Html.TextBoxFor(s => s.SC_Name, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.SC_Name)</i></li>
+            <li><label>SEO路径</label>@Html.TextBoxFor(s => s.SEOURL, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.SEOURL)</i></li>
+            <li><label>关键词</label>@Html.TextBoxFor(s => s.KeyWord, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.KeyWord)</i></li>
+            <li><label>描述</label>@Html.TextAreaFor(s => s.Description, new { @class = "textinput" })<i>@Html.ValidationMessageFor(s => s.Description)</i></li>
+            <li><label>内容<b>*</b></label>@Html.TextAreaFor(s => s.SC_Content, new { @class = "textedit", id = "SC_Content" })<i>@Html.ValidationMessageFor(s => s.SC_Content)</i></li>
+            <li><label>是否审核<b>*</b></label><cite>@Html.RadioButtonFor(s => s.Enable, true) 是 @Html.RadioButtonFor(s => s.Enable, false) 否</cite></li>
+            <li><label>&nbsp;</label>
+                <input name="" type="submit" class="btn" value="保存信息"/>
+                <input type="button" class="btn" value="返回列表" onclick='showJumpBox("/Content/@(Model.SCType == SpecialColumnType.AboutUs ? "AboutUs" : Model.SCType == SpecialColumnType.Raiders ? "Raiders" : "VisaQuestion")")'/>
+            </li>
+        </ul>
+    }
+</div>
+<script type="text/javascript">
+    UE.getEditor('SC_Content', {
+        serverUrl: "/UserUpload/UploadServer/@(Model.GUID)_@(UploadPage.Special)"
+    });
+</script>
+   

@@ -1,0 +1,10 @@
+﻿@model CategoryDropDownBox
+<div class="cityleft">
+    <select id="categoryDropDownBox@(Model.ParentID)_@(Model.CategoryIDName.ToString())" class="select2">
+        <option value="" data-parent="0" data-selected="@Model.Value" data-value="0">请选择</option>
+        @foreach (var item in Model.DropDownData)
+        { 
+            <option value="@(Model.CategoryIDName == DropDownState.CategoryID ? item.AutoKey.ToString() : item.CategoryName)" data-autoeky="@item.AutoKey" data-selected="@Model.Value" data-value="@item["childscount"]" @((Model.Value.Split('|').Contains(item.AutoKey.ToString()) || Model.Value.Split('|').Contains(item.CategoryName.ToEmptyTrimString())) ? "selected=selected" : "")>@item.CategoryName</option>
+        }
+    </select>
+</div>

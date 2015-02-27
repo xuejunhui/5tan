@@ -1,0 +1,37 @@
+﻿@model ViewModel
+<div class="Header container">
+    <div class="row cl pr">
+        <a class="Logo pa cp db" href="/">
+            <img src="@Url.Content("~/Upload/Network/logo.png")" class="png" width="170" height="185" alt="捂碳网络公司的LOGO" />
+        </a>
+        <ul class="Nav right cl pr">
+            <li @(Model.CurrentHeard.AutoKey == 0 ? "class=hover" : "") ><a href="/">首页</a></li>
+            @foreach (var item in @Model.HeardData)
+            {
+                List<GuideTB> glist = CurrentBLL.GBLL.GetGuides(item.GUID, 4);
+                <li @(Model.CurrentHeard.AutoKey == item.AutoKey ? "class=hover" : "")><a href="@URLUtility.NetWrokContentUrl(item.AutoKey, item.SEOURL)">@item.Shorttitle</a>
+                    <div class="subMenu">
+
+                        @if(glist!=null && glist.Count()>0)
+                        {
+                            <div class="navPart1 left">
+                                @for (int i = 0; i < glist.Count(); i++)
+                                {
+                                    <span><a href="@URLUtility.NetWordGuideUrl(item.AutoKey,item.SEOURL,glist[i].AutoKey)">@glist[i].GuideName</a></span> 
+                                }
+                            </div>
+                        }
+                       
+                        <div class="navPart2 left" @((glist == null || glist.Count() == 0) && !Model.IsWebsiteCase ? "style=width:520px;" : "")><span class="navPart2CnTitle">@item.Title</span> <span class="navPart2Desc">@item.Features</span> </div>
+                        <div class="navPart3 left">
+                            <img src="@item.PreviewIMG.GetSmallUrl()" width="200" height="160" /></div>
+                    </div>
+                </li>
+            }
+            
+            <li id="navBottom">
+                <img class="png" src="@Url.Content("~/Upload/Network/nav_bottom2.png")" width="780" height="59" />
+            </li>
+        </ul>
+    </div>
+</div>

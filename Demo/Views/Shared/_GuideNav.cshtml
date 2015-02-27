@@ -1,0 +1,14 @@
+﻿@model List<CategoryTB>
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a class="nvhm" title="网站首页" href="/">@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName</a>
+        <em>›</em>
+            <a href="@URLUtility.GuideCenterUrl()">目的地指南</a>
+        @foreach (var item in Model)
+        { 
+            <em>›</em>
+            <a href="@URLUtility.GuideCenterUrl(item.AutoKey)">@item.CategoryName</a>
+        }
+        
+    </div>
+</div>

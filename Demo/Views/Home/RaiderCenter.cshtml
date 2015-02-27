@@ -1,0 +1,124 @@
+﻿@model RaiderCenterModel
+@{
+    ViewBag.Title = "旅游攻略";
+}
+@section Css{
+    <link href="@Url.Content("~/Content/Region.css")" rel="stylesheet" type="text/css" />
+    
+    <style type="text/css">
+        .pic-list li,.pic-list .photo-big p
+        {
+            height:auto;
+        }
+    </style>
+}
+@section Js{
+    <script type="text/javascript">
+        jQuery(".ranking").slide({ titCell: ".hd li", mainCell: ".bd", delayTime: 0 });
+    </script>
+}
+<div id="ct" class="ct2 wp cl">
+    <div id="pt" class="bm cl">
+        <div class="z">
+            <a class="nvhm" title="网站首页" href="/">@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName</a>
+            <em>›</em>
+            <a title="旅游攻略" href="@URLUtility.RaiderCenterUrl()">旅游攻略</a>
+        </div>
+    </div>
+    <div class="mn animated fadeInUp">
+         <!--内容列表-->
+            <div class="bm">
+                <div class="portal-hd cl">
+                    <h2>旅游攻略列表</h2>
+                </div>
+                
+                <ul class="pic-list cl animated fadeInUp">
+                    @foreach (var item in Model.SearchModel.DataList)
+                    { 
+                        <li class="photo-big">
+                            <h3><a class="link" style="" href="@URLUtility.RaiderDetailUrl(item.AutoKey,item.SEOURL)">@item.SC_Name</a></h3>
+                            <a href="@URLUtility.RaiderDetailUrl(item.AutoKey,item.SEOURL)" title="@item.SC_Name">
+                                @Html.Action("LoadRelatedImg", new { guid = @item.GUID })
+                                <p>@item.Description.DisplayByMaxLength(80)</p>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!--分页-->
+            <div class="pagin">
+                @Model.SearchModel.Pagination.AdminPagingHtml()
+            </div>
+    </div>
+    <div class="sd pph">
+        <div class="mt20">
+                <div class="portal-hd">
+                    <div id="new-visa-t" class="area">
+                        <h2>旅游推荐</h2>
+                    </div>
+                </div>
+                <div class="bd">
+                    <div class="photo-small">
+                        <div id="photo-small-l" class="area">
+                            <script type="text/javascript">
+                                var sogou_ad_id = 396823;
+                                var sogou_ad_height = 60;
+                                var sogou_ad_width = 234;
+                            </script>
+                            <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+                            <ul>
+                                @foreach (var item in Model.RelatedContent)
+                                {
+                                    <li>
+                                        <div class="photo-pic">
+                                        <a target="_blank" title="@item.Title" href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)">
+                                            <img width="100" height="75" alt="@item.Title" src="@item.PreviewIMG.GetSmallUrl()"/>
+                                        </a>
+                                        </div>
+                                        <h3>
+                                        <a class="link" target="_blank" title="@item.Title" href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)">@item.Shorttitle</a>
+                                        </h3>
+                                        <p title="@item.Description">@item.Description.DisplayByMaxLength(20)</p>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+
+        <div id="new-article-t" class="new-article">
+                <div class="portal-hd">
+                    <div class="area">
+                        <h2>推荐景点</h2>
+                    </div>
+                </div>
+                <div class="bd">
+                     <div id="new-article-c" class="area">
+                          <script type="text/javascript">
+                            var sogou_ad_id = 396822;
+                            var sogou_ad_height = 250;
+                            var sogou_ad_width = 250;
+                        </script>
+                        <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+                        <ul>
+                            @foreach (var item in Model.RelatedGuide)
+                            {
+                            <li>
+                                <h3>
+                                    <a class="link" target="_blank" title="@item.GuideName" href="@URLUtility.GuideDetailUrl(item.AutoKey)">@item.GuideName</a>
+                                </h3>
+                                <p>
+                                <i class="quote"></i>
+                                    @item.Description.DisplayByMaxLength(35)
+                                </p>
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+    </div>
+</div>

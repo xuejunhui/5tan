@@ -1,0 +1,52 @@
+﻿@model GuideModel
+<script type="text/javascript" charset="utf-8" src="/UMEditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/UMEditor/ueditor.all.min.js"></script>
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/3")'>内容管理</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Content/Guide?webname=@Model.WebName")'>相关内容</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Content/Guide?guid=@(Model.RelatedGUID)&webname=@Model.WebName")'>@(ViewBag.Content == null ? "" : ((ContentTB)ViewBag.Content).Title) - 指南列表</a></li>
+        <li><a href="javascript:void(0);">@(Model.AutoKey == 0 ? "新增相关内容" : "编辑相关内容")</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div class="formtitle"><span>@(Model.AutoKey == 0 ? "新增相关内容" : "编辑相关内容")</span></div>
+    @if (Model.Msg != null)
+    {  
+        <div class="formtext" id="msgInfo">@Model.Msg.GetMessageInfo()</div>
+    }
+    @using (Html.BeginForm("EditGuide", "Content", new { }, FormMethod.Post))
+    {
+        <input type="hidden" value="@Model.AutoKey" name="AutoKey"/>
+        <input type="hidden" value="@Model.RelatedGUID" name="RelatedGUID"/>
+        <input type="hidden" value="@Model.GUID" name="GUID"/>
+        <input type="hidden" value="@Model.WebName" name="WebName"/>
+        if (ViewBag.Content != null)
+        {
+            <div class="formtext">
+                您正在@(Model.AutoKey == 0 ? "新增" : "编辑")
+                <b>@(((ContentTB)ViewBag.Content).Title)</b>
+                的相关内容！
+            </div>
+        }
+        <ul class="forminfo">
+            <li><label>指南名称<b>*</b></label>@Html.TextBoxFor(s => s.GuideName, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.GuideName)</i></li>
+            <li><label>指南范围<b>*</b></label><div class="dropdownbox">@Html.Action("DropDownBox", "Ajax", new { parentid = Model.WebName==WebName.Demo?(int)DropDownState.CategoryID:(int)DropDownState.NetworkCategory, value = Model.CategoryDropDownNav.ToEmptyTrimString(), dname = "CategoryID" })</div><i>@Html.ValidationMessageFor(s => s.CategoryID)</i></li>
+            <li><label>关键词</label>@Html.TextBoxFor(s => s.KeyWord, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.KeyWord)</i></li>
+            <li><label>描述</label>@Html.TextAreaFor(s => s.Description, new { @class = "textinput" })<i>@Html.ValidationMessageFor(s => s.Description)</i></li>
+            <li><label>指南内容<b>*</b></label>@Html.TextAreaFor(s => s.GuideContent, new { @class = "textedit", id = "GuideContent" })<i>@Html.ValidationMessageFor(s => s.GuideContent)</i></li>
+            <li><label>是否审核<b>*</b></label><cite>@Html.RadioButtonFor(s => s.Enable, true) 是 @Html.RadioButtonFor(s => s.Enable, false) 否</cite></li>
+            <li><label>&nbsp;</label>
+                <input name="" type="submit" class="btn" value="保存相关信息"/>
+                <input type="button" class="btn" value="返回列表" onclick='showJumpBox("/Content/Guide?guid=@(Model.RelatedGUID)&webname=@Model.WebName")'/>
+            </li>
+        </ul>
+    }
+</div>
+<script type="text/javascript">
+    UE.getEditor('GuideContent', {
+        serverUrl: "/UserUpload/UploadServer/@(Model.GUID)_@(UploadPage.Guide)"
+    });
+</script>
+   

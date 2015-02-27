@@ -1,0 +1,112 @@
+﻿@model ContactModel
+@{
+    ViewBag.Title = Model.CurrentContact.SC_Name;
+    ViewBag.Keywords = Model.CurrentContact.KeyWord;
+    ViewBag.Description = Model.CurrentContact.Description;
+}
+@section Css{
+    <link href="@Url.Content("~/Content/GuideDetail.css")" rel="stylesheet" type="text/css" />
+}
+<div  id="wp" class="wp j_wp">
+    <div id="pt" class="bm cl">
+        <div class="z">
+            <a class="nvhm" title="网站首页" href="/">@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName</a>
+            <em>›</em>
+            <a title="旅游攻略" href="@URLUtility.RaiderCenterUrl()">旅游攻略</a>
+            <em>›</em>
+            <a href="@URLUtility.ContactUrl(Model.CurrentContact.AutoKey,Model.CurrentContact.SEOURL)">@Model.CurrentContact.SC_Name</a>
+        </div>
+    </div>
+    <div id="ct" class="ct2 wp cl">
+        <div class="mn animated fadeInUp">
+            <div class="h hm">
+                <h1 class="ph">@Model.CurrentContact.SC_Name</h1>
+                 <p class="xg1">
+                     发布:
+                    <em id="_viewnum">@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName</em>
+                </p>
+             </div>
+             <div id="diysummarytop" class="area"></div>
+              <div class="s">
+                <div>
+                    <strong>简介：</strong>
+                    @Model.CurrentContact.Description
+                </div>
+            </div>
+             <div class="d">
+                @Html.Raw(Model.CurrentContact.SC_Content)
+            </div>
+        </div>
+        <div class="sd pph">
+          <div class="new-article">
+            <div class="portal-hd">
+                <div id="new-article-t" class="area">
+                    <h2>最新攻略</h2>
+                    <a class="more" href="@URLUtility.RaiderCenterUrl()">更多</a>
+                </div>
+            </div>
+            <div class="bd">
+                <div id="new-article-c" class="area">
+                     <script type="text/javascript">
+                         var sogou_ad_id = 396823;
+                         var sogou_ad_height = 60;
+                         var sogou_ad_width = 234;
+                            </script>
+                            <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+                    <ul>
+                        @foreach (var item in Model.RelatedContact)
+                        { 
+                        <li>
+                            <h3>
+                                <a class="link" title="@item.SC_Name" href="@URLUtility.RaiderDetailUrl(item.AutoKey,item.SEOURL)">@item.SC_Name</a>
+                            </h3>
+                            <p>
+                                <i class="quote"></i>
+                                @item.Description.DisplayByMaxLength(25)
+                            </p>
+                        </li>
+                        }
+                    </ul>
+                </div>
+                <div class="cl"></div>
+            </div>
+        </div>
+            <div class="mt20">
+                <div class="portal-hd">
+                    <div id="new-visa-t" class="area">
+                        <h2>旅游推荐</h2>
+                    </div>
+                </div>
+                <div class="bd">
+                    <div class="photo-small">
+                        <div id="photo-small-l" class="area">
+                            <script type="text/javascript">
+                                var sogou_ad_id = 396822;
+                                var sogou_ad_height = 250;
+                                var sogou_ad_width = 250;
+                        </script>
+                        <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
+                            <ul>
+                                @foreach (var item in Model.RelatedContent)
+                                {
+                                    <li>
+                                        <div class="photo-pic">
+                                        <a title="@item.Title" href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)">
+                                            <img width="100" height="75" alt="@item.Title" src="@item.PreviewIMG.GetSmallUrl()"/>
+                                        </a>
+                                        </div>
+                                        <h3>
+                                        <a class="link" target="_blank" title="@item.Title" href="@URLUtility.SummerDetailUrl(item.AutoKey, item.SEOURL)">@item.Shorttitle</a>
+                                        </h3>
+                                        <p title="@item.Description">@item.Description.DisplayByMaxLength(20)</p>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

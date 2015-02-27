@@ -1,0 +1,46 @@
+﻿@model CategoryModel
+@{
+    int menuid = ((ChildItem)ViewBag.Menu).ID;
+}
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/2")'>系统分类</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/Category/@(menuid)")'>@(((ChildItem)ViewBag.Menu).MenuName)</a></li>
+        @foreach (var item in (List<CategoryTB>)ViewBag.Nav)
+        { 
+           @:<li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/CategoryListByParentID?parentid=@item.AutoKey&id=@menuid")')'>@item.CategoryName</a></li>
+        }
+        <li><a href="javascript:void(0);">@(Model.AutoKey == 0 ? "新增分类" : "编辑分类")</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div class="formtitle"><span>@(Model.AutoKey == 0 ? "新增分类" : "编辑分类")</span></div>
+    @if (Model.Msg != null)
+    {  
+        <div class="formtext" id="msgInfo">@Model.Msg.GetMessageInfo()</div>
+    }
+    @using (Html.BeginForm("EditCategory", "Manage", new { menuid = menuid }, FormMethod.Post))
+    {
+         <ul class="forminfo">
+            <li>
+                <label>分类名称</label>@Html.TextBoxFor(s => s.CategoryName, new { @class = "dfinput" })
+                <i>@Html.ValidationMessageFor(s => s.CategoryName)</i>
+            </li>
+            <li>
+                <label>分类SEO</label>@Html.TextBoxFor(s => s.SEOURL, new { @class = "dfinput" })
+                <i>@Html.ValidationMessageFor(s => s.SEOURL)</i>
+            </li>
+            <li>
+                <label>分类关键词</label>@Html.TextBoxFor(s => s.KeyWord, new { @class = "dfinput" })
+                <i>@Html.ValidationMessageFor(s => s.KeyWord)</i>
+            </li>
+            <li><label>分类描述</label>@Html.TextAreaFor(s => s.Description, new { @class = "textinput" })<i>@Html.ValidationMessageFor(s => s.Description)</i></li>
+            <li><label>&nbsp;</label>
+                @Html.HiddenFor(s => s.ParentID)
+                @Html.HiddenFor(s => s.AutoKey)
+                <input name="" type="submit" class="btn" value="保存分类信息"/>
+            </li>
+         </ul>
+    }
+</div>

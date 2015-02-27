@@ -1,0 +1,32 @@
+﻿@model FriendLinkModel
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/3")'>内容管理</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Content/FriendLink")'>友情链接</a></li>
+        <li><a href="javascript:void(0);">@(Model.AutoKey == 0 ? "新增友链" : "编辑友链")</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div class="formtitle"><span>@(Model.AutoKey == 0 ? "新增友链" : "编辑友链")</span></div>
+    @if (Model.Msg != null)
+    {  
+        <div class="formtext" id="msgInfo">@Model.Msg.GetMessageInfo()</div>
+    }
+    @using (Html.BeginForm("EditFriendLink", "Content", new { }, FormMethod.Post))
+    {
+        <input type="hidden" name="AutoKey" value="@Model.AutoKey"/>
+        <ul class="forminfo">
+            <li><label>友链名称<b>*</b></label>@Html.TextBoxFor(s => s.LinkName, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.LinkName)</i></li>
+            <li><label>连接地址<b>*</b></label>@Html.TextBoxFor(s => s.LinkUrl, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.LinkUrl)</i></li>
+            <li><label>备注<b>*</b></label>@Html.TextAreaFor(s => s.Note, new { @class = "textinput" })<i>@Html.ValidationMessageFor(s => s.Note)</i></li>
+            <li><label>是否审核<b>*</b></label><cite>@Html.RadioButtonFor(s => s.Enable, true) 是 @Html.RadioButtonFor(s => s.Enable, false) 否</cite></li>
+            <li><label>&nbsp;</label>
+                <input name="" type="submit" class="btn" value="保存友链信息"/>
+                <input type="button" class="btn" value="返回列表" onclick='showJumpBox("/Content/FriendLink")'/>
+            </li>
+        </ul>
+    }
+</div>
+
+   

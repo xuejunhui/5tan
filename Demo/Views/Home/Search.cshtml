@@ -1,0 +1,228 @@
+﻿@model SearchModel<RecordItem>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>@Model.Range.ToChinaTxt()中搜索 @(Model.Keyword) - @ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName</title>
+<meta name="keywords" content="@Model.Keyword @Model.Range.ToChinaTxt() 搜索 整站搜索" />
+<meta name="description" content="@Model.Range.ToChinaTxt()中搜索有关@(Model.Keyword)内容的结果列表" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="author" content="5TAN.NET" />
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/Search.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/common.js")" type="text/javascript"></script>
+ <!--[if lt IE 9]> <script src="@Url.Content("~/Scripts/css3-mediaqueries.js")" type="text/javascript"></script> <![endif]-->
+  <!--[if IE 6]>
+    <script src="@Url.Content("~/Scripts/png.js")" type="text/javascript" ></script>
+     <script type="text/javascript">
+     DD_belatedPNG.fix('#scform img,.ptw img,.error img');
+    </script> 
+    <script language='javascript' type="text/javascript">   
+    function ResumeError() {  
+         return true;  
+    }  
+    window.onerror = ResumeError;   
+    </script> 
+    <![endif]-->
+</head>
+<body id="nv_search" onkeydown="if(event.keyCode==27) return false;">
+    <div id="toptb" class="cl">
+        <div class="z">
+            <a id="navs" class="xi2"  href="/" initialized="true">返回首页</a>
+        </div>
+        <div class="y">
+            <a href="@URLUtility.CategoryUrl(0, "Overseas")" class="xi2"  hidefocus="true"title="港澳台及境外">港澳台及境外</a>
+            <a href="@URLUtility.CategoryUrl(0, "Domestic")" class="xi2"  hidefocus="true" title="国内">国内</a>
+            <a href="@URLUtility.CategoryUrl(0, "Province")" class="xi2"  hidefocus="true" title="省内">省内</a>
+            <a href="@URLUtility.VisaCenterUrl()" class="xi2"  hidefocus="true" title="签证">签证</a>
+            <a href="@URLUtility.GuideCenterUrl()" class="xi2"  hidefocus="true" title="目的地指南">目的地指南</a>
+            <a href="@URLUtility.RaiderCenterUrl()" class="xi2"  title="旅游攻略">旅游攻略</a>
+            <a href="@URLUtility.ContactUrl(0, "ContactUs")" class="xi2" hidefocus="true" title="联系我们">联系我们</a>
+        </div>
+    </div>
+    @if (Model.Keyword.IsNullOrEmpty())
+    {
+         <div id="ct" class="cl w">
+                <div class="mw">
+                    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+                    { 
+                        <div class="hm mtw ptw pbw">
+                            <h1 class="mtw ptw">
+                                <a title="@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName 整站搜索" href="@URLUtility.SearchUrl()">
+                                    <img alt="@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName 整站搜索" src="@Url.Content("~/Content/search/logo_sc.png")"/>
+                                </a>
+                            </h1>
+                        </div>
+                        <table id="scform_tb" cellspacing="0" cellpadding="0" style="margin: 0 auto;">
+                            <tr>
+                                <td>
+                                    <div id="scform_tb" class="cl">
+                                        <a @(Model.Range.IsNullOrEmpty() || Model.Range.ToEmptyTrimString().Equals("all", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("all", Model.Keyword)">全部</a>
+                                        <a @(Model.Range.ToEmptyTrimString().Equals("Province", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Province", Model.Keyword)">省內旅遊</a>
+                                        <a @(Model.Range.ToEmptyTrimString().Equals("Domestic", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Domestic", Model.Keyword)">国内旅遊</a>
+                                        <a @(Model.Range.ToEmptyTrimString().Equals("Overseas", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Overseas", Model.Keyword)">港澳台及境外旅遊</a>
+                                        <a @(Model.Range.ToEmptyTrimString().Equals("Visa", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Visa", Model.Keyword)">签证</a>
+                                        <a @(Model.Range.ToEmptyTrimString().Equals("Raiders", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Raiders", Model.Keyword)">旅游攻略</a>
+                                        <a @(Model.Range.ToEmptyTrimString().Equals("Ticket", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Ticket", Model.Keyword)">票务预订</a>
+                                        <a @(Model.Range.ToEmptyTrimString().Equals("Guide", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Guide", Model.Keyword)">目的地指南</a>
+                                        <input type="hidden" value="@Model.Range" name="ctype"/>
+                                    </div>
+                                    <table id="scform_form" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="td_srchtxt">
+                                                <input id="scform_srchtxt" value="@Model.Keyword" class=" xg1" type="text" tabindex="1" value="" maxlength="40" size="65" name="keyword" placeholder="请输入搜索内容"/>
+                                                <script type="text/javascript">
+                                                    initSearchmenu('scform_srchtxt'); $('scform_srchtxt').focus();
+                                                </script>
+                                                </td>
+                                                <td class="td_srchbtn" width="107">
+                                                    <button id="scform_submit" value="true" type="submit">
+                                                    <strong>搜索</strong>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </div>
+            </div>
+    }
+    else
+    {
+        <div id="ct" class="w">
+             @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+             {
+                 <table id="scform" class="mbm" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                            <h1>
+                                <a title="@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName 整站搜索" href="@URLUtility.SearchUrl()">
+                                    <img alt="@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName 整站搜索" src="@Url.Content("~/Content/search/logo_sc_s.png")"/>
+                                </a>
+                            </h1>
+                        </td>
+                        <td>
+                            <div id="scform_tb" class="cl">
+                                <a @(Model.Range.IsNullOrEmpty() || Model.Range.ToEmptyTrimString().Equals("all", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("all", Model.Keyword)">全部</a>
+                                <a @(Model.Range.ToEmptyTrimString().Equals("Province", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Province", Model.Keyword)">省內旅遊</a>
+                                <a @(Model.Range.ToEmptyTrimString().Equals("Domestic", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Domestic", Model.Keyword)">国内旅遊</a>
+                                <a @(Model.Range.ToEmptyTrimString().Equals("Overseas", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Overseas", Model.Keyword)">港澳台及境外旅遊</a>
+                                <a @(Model.Range.ToEmptyTrimString().Equals("Visa", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Visa", Model.Keyword)">签证</a>
+                                <a @(Model.Range.ToEmptyTrimString().Equals("Raiders", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Raiders", Model.Keyword)">旅游攻略</a>
+                                <a @(Model.Range.ToEmptyTrimString().Equals("Ticket", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Ticket", Model.Keyword)">票务预订</a>
+                                <a @(Model.Range.ToEmptyTrimString().Equals("Guide", StringComparison.OrdinalIgnoreCase) ? "class=a" : "") href="@URLUtility.SearchUrl("Guide", Model.Keyword)">目的地指南</a>
+                                <input type="hidden" value="@Model.Range" name="ctype"/>
+                            </div>
+                            <table id="scform_form" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="td_srchtxt">
+                                        <input id="scform_srchtxt" value="@Model.Keyword" class=" xg1" type="text" tabindex="1" value="" maxlength="40" size="65" name="keyword" placeholder="请输入搜索内容"/>
+                                        <script type="text/javascript">
+                                            initSearchmenu('scform_srchtxt'); $('scform_srchtxt').focus();
+                                        </script>
+                                        </td>
+                                        <td class="td_srchbtn" width="107">
+                                            <button id="scform_submit" value="true" type="submit">
+                                            <strong>搜索</strong>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                 </table>
+             }
+            
+             <div class="tl">
+             
+                <div class="sttl mbn">
+                    <h2>结果:<em>
+                    @if (Model.RowCount > 0)
+                    {
+                        @:找到与 “<span class="emfont">@Model.Keyword</span>” 相关内容 @Model.RowCount 个
+                    }
+                    else
+                    { 
+                        @:未找到与 “<span class="emfont">@Model.Keyword</span>” 相关内容
+                    }
+                    </em></h2>
+                </div>
+            @if (Model.RowCount > 0)
+             {
+                <div class="slst mtw">
+                    <ul>
+                    @foreach (var item in Model.DataList)
+                    {
+                        String imgurl = item["PreviewIMG"].ToEmptyTrimString().GetSmallUrl();
+                        String detailurl = URLUtility.SearchDetailUrl(item["ctype"].ToEmptyTrimString(), item["seourl"].ToEmptyTrimString(), item["AutoKey"].ToInt32Value());
+                        <li class="pbw">
+                            <h3 class="xs3"><a target="_blank" title="@item["Title"]" href="@detailurl">@item["Title"].ToEmptyTrimString().ToHighlightStr(Model.Keyword)</a></h3>
+                            <div class="cl detail">
+                            @if (!imgurl.IsNullOrEmpty())
+                            {
+                                <div class="image_pic z">
+                                    <a href="@detailurl" target="_blank">
+                                        <img src="@imgurl" alt="@item["Title"]" width="121" height="80"/>
+                                    </a>
+                                </div>
+                            }
+                                <div class="z">
+                                    <div class="m">
+                                        所属分类:&nbsp;<a target="_blank" href="@URLUtility.SearchCategoryDetailUrl(item["ctype"].ToEmptyTrimString(), item["categoryid"].ToInt32Value())">@item["CategoryName"].ToEmptyTrimString().ToHighlightStr(Model.Keyword)</a>
+                                    </div>
+                                    <div class="c-abstract">
+                                        <span class="m">简介：</span>
+                                        @item["Description"].ToEmptyTrimString().DisplayByMaxLength(90).ToHighlightStr(Model.Keyword)
+                                    </div>
+                                    <div class="mu">
+                                        <a href="@detailurl" target="_blank" title="@detailurl">@(ConfigBLL.CurrentSysConfigInfo.Sys_Value.DomainUrl.RemoveEndsWith("/"))@(detailurl)</a>
+                                        &nbsp;&nbsp;@(String.Format("{0:yyyy-MM-dd}", item["CreateTime"]))
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    </ul>
+                </div>
+                <div class="pagin">
+                    @Model.Pagination.AdminPagingHtml()
+                </div>
+            }
+             else
+             { 
+                <div class="error">
+                    <h2>痛哭也没用,赶快找找相关内容！</h2>
+                    <p>小提示:多个词组用空格分开可能就能找到你想要的内容哦.</p>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('.error').css({ 'position': 'absolute', 'left': ($(window).width() - 490) / 2 });
+                        $(window).resize(function () {
+                            $('.error').css({ 'position': 'absolute', 'left': ($(window).width() - 490) / 2 });
+                        })
+                    });  
+                </script> 
+             }
+             </div>
+             
+        </div>
+    }
+    <div id="ft" class="w cl">
+        <em>
+            版权所有 © 2001-@DateTime.Now.Year
+            <strong>
+                <a target="_blank" href="@ConfigBLL.CurrentSysConfigInfo.Sys_Value.DomainUrl.ToLink()">@ConfigBLL.CurrentSysConfigInfo.Sys_Value.WebName</a>
+            </strong>
+        </em>
+        <em>
+            技术支持
+            <a target="_blank" href="http://www.5tan.net">5TAN.NET</a>
+        </em>
+        <span class="pipe">|</span>
+        @ConfigBLL.CurrentSysConfigInfo.Sys_Value.BeiAn
+    </div>
+</body>
+</html>

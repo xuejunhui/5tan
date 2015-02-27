@@ -1,0 +1,13 @@
+﻿@model List<Sys_FilesTB>
+@if (Model != null && Model.Count() > 0)
+{
+<div class="relatedimg">
+        @foreach (var item in Model)
+        {
+            
+            <div class="inner"><img src="@item.FileURL.GetSmallUrl()" alt="" onload="AutoResizeImage(100,100,this)"/></div>
+                
+        }
+    <div class="cl"></div>
+</div>
+}

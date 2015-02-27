@@ -1,0 +1,17 @@
+﻿@model List<MenuItem>
+@if (Model.Count() > 1)
+{
+    @Html.Partial("_FunListView", Model);
+}
+else if (Model.Count() == 1)
+{
+    <div class="place">
+    <span>當前位置：</span>
+        <ul class="placeul">
+            <li><a href="javascript:void(0);" >@Model[0].MenuName</a></li>
+        </ul>
+    </div>
+    <div class="formbody">
+        @Html.Partial("_FunListView", Model)
+    </div>
+}

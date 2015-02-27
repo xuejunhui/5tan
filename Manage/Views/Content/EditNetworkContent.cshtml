@@ -1,0 +1,63 @@
+﻿@model ContentModel
+<script type="text/javascript" charset="utf-8" src="/UMEditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/UMEditor/ueditor.all.min.js"></script>
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/3")'>内容管理</a></li>
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Content/SummerManage?webname=@Model.WebName")'>Network主内容</a></li>
+        <li><a href="javascript:void(0);">@(Model.AutoKey == 0 ? "新增内容" : "编辑内容")</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div class="formtitle"><span>@(Model.AutoKey == 0 ? "新增内容" : "编辑内容")</span></div>
+    @if (Model.Msg != null)
+    {  
+        <div class="formtext" id="msgInfo">@Model.Msg.GetMessageInfo()</div>
+    }
+    @using (Html.BeginForm("EditSummer", "Content", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(s => s.AutoKey)
+        @Html.HiddenFor(s => s.GUID)
+        <ul class="forminfo">
+            <li><label>标题<b>*</b></label>@Html.TextBoxFor(s => s.Title, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Title)</i></li>
+            <li><label>短标题<b>*</b></label>@Html.TextBoxFor(s => s.Shorttitle, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Shorttitle)</i></li>
+            <li><label>SEO路径</label>@Html.TextBoxFor(s => s.SEOURL, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.SEOURL)</i></li>
+            <li><label>价格<b>*</b></label>@Html.TextBoxFor(s => s.Price, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.Price)</i></li>
+            <li><label>所属分类<b>*</b></label><div class="dropdownbox">@Html.Action("DropDownBox", "Ajax", new { parentid = (int)DropDownState.NetworkCategory, value = Model.CategoryDropDownNav.ToEmptyTrimString(), dname = "CategoryID" })</div><i>@Html.ValidationMessageFor(s => s.CategoryID)</i></li>
+
+            @if (!String.IsNullOrEmpty(Model.PreviewIMG))
+            { 
+                <li>
+                    <label>预览图片</label>
+                    <img src="@Model.PreviewIMG.GetSmallUrl()" style="max-height:200px;max-width:360px;"/><br/>
+                    @Html.HiddenFor(s => s.PreviewIMG)
+                </li>
+                <li><label>&nbsp;</label><input type="file" name="upImg"/></li>
+            }
+            else
+            {
+                <li>
+                    <label>预览图片</label>
+                    <input type="file" name="upImg"/>
+                </li>
+            }
+            <li><label>关键词</label>@Html.TextBoxFor(s => s.KeyWord, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(s => s.KeyWord)</i></li>
+            <li><label>描述</label>@Html.TextAreaFor(s => s.Description, new { @class = "textinput" })<i>@Html.ValidationMessageFor(s => s.Description)</i></li>
+            <li><label>特色<b>*</b></label>@Html.TextAreaFor(s => s.Features, new { @class = "textinput" })<i>@Html.ValidationMessageFor(s => s.Features)每条特色间请回车区分</i></li>
+            <li><label>内容<b>*</b></label>@Html.TextAreaFor(s => s.XMLContent.ProductDetail, new { @class = "textedit", id = "ProductDetail" })<i>@Html.ValidationMessageFor(s => s.XMLContent.ProductDetail)</i></li>
+            <li><label>是否审核<b>*</b></label><cite>@Html.RadioButtonFor(s => s.Enable, true) 是 @Html.RadioButtonFor(s => s.Enable, false) 否</cite></li>
+                
+                
+            <li><label>&nbsp;</label>
+                @Html.HiddenFor(s => s.WebName)
+                <input name="" type="submit" class="btn" value="保存信息"/>
+            </li>
+        </ul>
+    }
+</div>
+<script type="text/javascript">
+    UE.getEditor('ProductDetail', {
+        serverUrl: "/UserUpload/UploadServer/@(Model.GUID)_@(UploadPage.Network)"
+    });
+</script>

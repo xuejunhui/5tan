@@ -1,0 +1,39 @@
+﻿a{color:#369;}
+#toptb{padding:0 15px;border-bottom:1px solid #EFEFEF;}
+#ct{margin:0 20px;min-height: 350px;}
+#fh{width:644px;}
+.mw #fh{width:100%;}
+#scform{margin:10px 0;}
+#scform h1{margin-right:20px;}
+#scform_tb a{float:left;display:inline;margin:0 15px 0 3px;height:26px;line-height:26px;}
+#scform_tb .y a{margin:0 3px 0 15px;}
+#scform_tb .a{background:url(search/searchbar.png) no-repeat 50% 100%;color:#333;font-weight:700;}
+#scform_form{background:url(search/searchbar.png) repeat-x 0 0;}
+.td_srchtxt{background:url(search/searchbar.png) no-repeat 0 -35px;}
+.td_srchbtn{background:url(search/searchbar.png) no-repeat 0 -70px;}
+#scform_srchtxt{padding:0 10px;width:460px;background:transparent;outline:none;}
+#scform_submit{width:107px;opacity:0;filter:alpha(opacity=0);cursor:pointer;}
+#scform_srchtxt,#scform_submit{height:35px;border:none;}
+.ie_all #scform_srchtxt{height:33px;line-height:33px;}
+#nv_search #ft{margin:20px;text-align:center;}
+.sttl{margin:10px 0;padding:5px;border-bottom:1px solid #CCC;background:#F5F5F5;}
+.slst{width:800px;}
+.slst a{color:#00C;font-weight:400;}
+.slst a:visited{color:purple;}
+.slst a strong{font-weight:400;}
+.slst p span{color:#3A8000;}
+.slst p span a,.slst p span a:visited{color:#666;}
+.emfont {color:#ff0000;}
+.slst ul{margin-left:20px;}
+.pbw .detail{margin-top:5px;}
+.pbw .image_pic{margin-top:5px;list-style: outside none none;margin-right: 17px;}
+.pbw .m{color:#666;}
+.pbw .m a{color:#09c;}
+.pbw .c-abstract{font-size:13px;width:600px;color:#333;height:44px; overflow:hidden;}
+.pbw .mu,.pbw .mu a{color:#008000;}
+
+.error{background:url(search/404.png) no-repeat; width:490px; margin-top:75px;padding-top:25px;height:150px;}
+.error h2{font-size:22px; padding-left:154px;color:#D39C1F;}
+.error p{padding-left:154px; line-height:35px;color:#717678;}
+.reindex{padding-left:154px;}
+.reindex a{width:115px; height:35px; font-size:14px; font-weight:bold; color:#fff; background:#3c95c8; display:block; line-height:35px; text-align:center;border-radius: 3px; behavior:url(js/pie.htc);margin-top:20px;}

@@ -1,0 +1,29 @@
+﻿/*-----------------------------Banner--------------------------------*/
+.bAS { width: 95%; margin: 0 auto; overflow: hidden; position: relative; height: 300px; z-index: 1; }
+.bannerI0 { top: -400px; left: 0; }
+.bannerS0 { right: -300px; bottom: 100px; background: #FE4C40 }
+.bannerI1 { top: -400px; left: 0; bottom: 0; }
+.bannerS1 { bottom: -300px; right: 0; background: #3cd3dc; }
+.bannerI2 { right: -400px; bottom: 0; }
+.bannerS2 { top: -300px; right: 0; background: #f89b18; }
+.bannerI3 { top: -400px; left: 0; }
+.bannerS3 { bottom: -300px; right: 0; background: #a700af; }
+.bannerI4 { top: -400px; left: 0; }
+.bannerS4 { bottom: -300px; right: 0; background: #32912f; }
+.Banner { height: 600px; overflow: hidden; position: relative; z-index: 3; }
+.bannerLeftBar, .bannerRightBar { height: 40px; top: 285px; width: 40px; }
+.bannerLeftBar { background: url(network/bigPng.png) -167px 0; }
+.bannerRightBar { background: url(network/bigPng.png) -167px -40px; }
+.bannerImage { opacity: 0; }
+.bannerSlogan { opacity: 0; text-align: center; position: absolute; width: 300px; height: 300px; z-index: 2; padding: 0 20px; }
+.bannerInner { height: 600px; }
+.bannerInner h1, .bannerInner h3 { color: white; font-size: 14pt; line-height: 30px; }
+.bannerInner h3 { text-align: left; text-indent: 20px; font-size: 11pt; line-height: 30px; font-weight: normal; margin-top: 30px; }
+.bannerControl { margin: 0; padding: 0; position: absolute; bottom: 10px; right: 0px; }
+.bannerControl li { width: 25px; height: 2px; margin-left: 6px; _margin-left: 3px; background: black; float: left; cursor: pointer; }
+.bannerIcon, .bannerTitle, .bannerDesc, .bannerButton { position: absolute; z-index: 1; }
+.bannerIcon { width: 27px; height: 27px; left: -120px; top: 20px; }
+.bannerTitle { width: 210px; height: 40px; line-height: 70px; font-size: 13pt; color: white; top: -300px; left: 55px; text-indent: 10px; }
+.bannerDesc { width: 275px; font-size: 11pt; color: white; line-height: 30px; text-align: left; left: 300px; top: 90px; }
+.bannerButton { width: 100px; right: 450px; bottom: 20px; cursor: pointer; }
+.bannerButton a { display: block; width: 160px; height: 25px; background: url(network/morearrow.jpg) right no-repeat; color: white; padding: 5px; }

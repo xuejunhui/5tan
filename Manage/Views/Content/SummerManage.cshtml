@@ -1,0 +1,168 @@
+﻿@model SearchModel<ContentTB>
+<div class="place">
+    <span>當前位置：</span>
+    <ul class="placeul">
+        <li><a href="javascript:void(0);" onclick='showJumpBox("/Manage/FunIndex/3")'>内容管理</a></li>
+        <li><a href="javascript:void(0);">内容列表 </a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div id="usual1" class="usual"> 
+        <div class="tools">
+            @using (Html.BeginForm("SummerManage", "Content", FormMethod.Get))
+            {
+                <ul class="seachform">
+                    <li>
+                        <label>审核</label>
+                        <div class="cityleft">
+                            @Html.DropDownListFor(s => s.IsEnable, new List<SelectListItem> { 
+                                new SelectListItem(){Text="所有",Value=""},
+                                new SelectListItem(){Text="未审核",Value="0"},
+                                new SelectListItem(){Text="已审核",Value="1"}
+                            }, new { @class = "select3" })
+                        </div>
+                    </li>
+                    <li>
+                        <label>置顶状态</label>
+                        @if(Model.WebName==WebName.Demo)
+                        {
+                        <div class="cityleft">
+                            @Html.DropDownListFor(s => s.TopState, new List<SelectListItem> { 
+                                new SelectListItem(){Text="所有",Value=""},
+                                new SelectListItem(){Text="不置顶",Value="0"},
+                                new SelectListItem(){Text="首页置顶",Value="1"},
+                                new SelectListItem(){Text="列表置顶",Value="2"},
+                                new SelectListItem(){Text="全局置顶",Value="3"}
+                            }, new { @class = "select3" })
+                        </div>
+                        }
+                        else if (Model.WebName == WebName.NetWork)
+                        { 
+                        <div class="cityleft">
+                            @Html.DropDownListFor(s => s.TopState, new List<SelectListItem> { 
+                                new SelectListItem(){Text="所有",Value=""},
+                                new SelectListItem(){Text="不置顶",Value="0"},
+                                new SelectListItem(){Text="头部导航",Value="1"},
+                            }, new { @class = "select3" })
+                        </div>
+                        }
+                    </li>
+                    @if(Model.WebName==WebName.Demo)
+                    {
+                    <li>
+                        <label>范围</label>
+                        @Html.Action("LoadSelectCategoryDropDownBox", "Ajax", new { state = DropDownState.CategoryID, value = Model.Range, name = "Range" })
+                    </li>
+                    }
+                    <li>
+                        <label></label>
+                    </li>
+                    <li><label>查询</label>
+                        @Html.HiddenFor(s=>s.WebName)
+                        @Html.TextBoxFor(s => s.Keyword, new { @class = "scinput" })
+                    </li>
+                    <li><label>&nbsp;</label><input type="submit" class="scbtn" value="查询"/></li>
+                </ul>
+            }
+            </div>
+        <div class="tools">
+            <ul class="toolbar1">
+                @if(Model.WebName==WebName.Demo)
+                {
+                    <li id="topRecommend3" data-action="SetTopContent" data-value="3"><span><img alt="" src="/content/account/top.png" /></span>全局置顶</li>
+                    <li id="topRecommend2" data-action="SetTopContent" data-value="2"><span><img alt="" src="/content/account/list_top.png" /></span>列表置顶</li>
+                    <li id="topRecommend1" data-action="SetTopContent" data-value="1"><span><img alt="" src="/content/account/list_top.png" /></span>首页置顶</li>
+                }
+                else if (Model.WebName == WebName.NetWork)
+                { 
+                    <li id="topRecommend1" data-action="SetTopContent" data-value="1"><span><img alt="" src="/content/account/list_top.png" /></span>头部导航置顶</li>
+                }
+                <li id="topRecommend0" data-action="SetTopContent" data-value="0"><span><img alt="" src="/content/account/arrow_down.png" /></span>取消置顶</li>
+                <li id="setEnableState1" data-action="VerifyContent" data-value="1"><span><img alt="" src="/content/account/check_list-24.png" /></span>批量审核</li>
+                <li id="setEnableState0" data-action="VerifyContent" data-value="0"><span><img alt="" src="/content/account/cancelstate.png" /></span>批量取消审核</li>
+                <li onclick='showJumpBox("/Content/EditSummer?autokey=0&webname=@Model.WebName")'><span><img alt="" src="/content/account/t01.png" /></span>新增内容</li>
+                <li id="BulkDelete" data-value="DelContentInfo"><span><img alt="" src="/content/account/t03.png" /></span>批量刪除</li>
+                @if (!string.IsNullOrEmpty(Model.Keyword) || !string.IsNullOrEmpty(Model.IsEnable) || !string.IsNullOrEmpty(Model.Range) || !string.IsNullOrEmpty(Model.TopState))
+                { 
+                    <li onclick='showJumpBox("/Content/SummerManage?webname=@Model.WebName")'><span><img  alt="" src="/content/account/t04.png" /></span>清除查询</li>
+                }
+            </ul>
+        </div>
+        <table class="imgtable">
+    	    <thead>
+    	        <tr>
+                    <th width="50"><input id="cball" type="checkbox" /></th>
+                    <th width="100">预览图片</th>
+                    <th>标题</th>
+                    <th width="80">置顶状态</th>
+                    @if(Model.WebName==WebName.Demo)
+                    {
+                        <th width="80">旅游天数</th>
+                        <th width="80">交通工具</th>
+                        <th width="60">价格</th>
+                    }
+                    <th width="120">所属分类</th>
+                    <th width="50">审核</th>
+                    <th width="80">创建时间</th>
+                    <th width="130">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model.DataList)
+                    {
+                       <tr>
+                            <td><input name="cbno" type="checkbox" value="@item.AutoKey" /></td>
+                            <td><img src="@item.PreviewIMG.GetSmallUrl()" width="80" height="60" alt=""/></td>
+                            <td title="@item.Title"><a target="_blank" class="tablelink" href="@URLUtility.SummerDetailUrl(item.AutoKey,item.SEOURL)">@item.Title.DisplayByMaxLength(20)</a></td>
+                            <td>
+                                @if(Model.WebName==WebName.Demo)
+                                {
+                                    switch (item["MainTop"].ToInt32Value())
+                                    {
+                                        case 0: @:不置顶 
+                                        break;
+                                        case 2: @:列表置顶 
+                                        break;
+                                        case 1: @:首页置顶 
+                                        break;
+                                        case 3: @:全局置顶 
+                                        break;
+                                    }
+                                }
+                                else if(Model.WebName==WebName.NetWork)
+                                {
+                                    switch (item["MainTop"].ToInt32Value())
+                                    {
+                                        case 0: @:不置顶 
+                                        break;
+                                        case 1: @:头部导航 
+                                        break;
+                                    }
+                                }
+                            </td>
+                           @if(Model.WebName==WebName.Demo)
+                           {
+                            <td>@item.TravelingDays</td>
+                            <td>@item.Transport</td>
+                            <td>@item.Price.ToPrice()</td>
+                           }
+                            <td>@item["CategoryName"]</td>
+                            <td>@(item.Enable ? "通过" : "未审核")</td>
+                            <td>@String.Format("{0:yyyy-MM-dd}", item.CreateTime)</td>
+                            <td>
+                                <a href="/Content/Guide?guid=@(item.GUID)&webname=@Model.WebName" class="tablelink">@(Model.WebName == WebName.Demo ? "目的地指南" : "相关内容") </a>
+                                <a href="/Content/EditSummer?autokey=@(item.AutoKey)&webname=@Model.WebName" class="tablelink">編輯</a>
+                                <a href="javascript:void(0);" class="tablelink del" data-value="DelContentInfo">刪除</a>
+                            </td>
+                       </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="pagin">
+            @Model.Pagination.AdminPagingHtml()
+        </div>
+    </div>
+</div>

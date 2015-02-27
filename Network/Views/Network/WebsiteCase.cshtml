@@ -1,0 +1,38 @@
+﻿@model ContentViewModel
+@section Css{
+    <link href="@Url.Content("~/Content/Network_Content.css")" rel="stylesheet" type="text/css" />    
+}
+@section Js{
+    <script src="@Url.Content("~/Scripts/jquery.pin.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            $(".wrapperRight").pin({
+                minWidth: 940
+            });
+        }
+    </script>
+}
+@Html.Partial("_Banner2", Model.Nav)
+<div class="container pr">
+    <div class="row mtop30 mb30 pr">
+        <div class="wrapperLeft left pr">
+            <ul class="webcase pr">
+                @foreach(var item in Model.SearchGuides.DataList)
+                {
+                <li class="pr cl">
+                    <a href="@URLUtility.NetWordGuideUrl(Model.CurrentHeard.AutoKey, Model.CurrentHeard.SEOURL, Model.CurrentCategory.AutoKey, Model.CurrentCategory.SEOURL, item.AutoKey)">
+                        <div><img src="@item["ImgUrl"].ToEmptyTrimString().GetSmallUrl()" alt="@item.GuideName" width="320" height="200"/></div>
+                        <div class="casetitle"><i></i><span class="cl">@item.GuideName</span></div>
+                    </a>
+                </li>
+                }
+            </ul>
+        </div>
+        <div class="wrapperRight cl left">
+            <div class="right_category">
+                @Html.Partial("_Right", Model)
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
