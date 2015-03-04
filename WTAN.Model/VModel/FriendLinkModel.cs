@@ -51,6 +51,8 @@ namespace WTAN.Model.VModel
         ///</summary>
         public DateTime CreateTime { get; set; }
 
+        public String WebName { get; set; }
+
         ///<summary>
         ///Enable
         ///</summary>

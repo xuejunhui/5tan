@@ -12,18 +12,26 @@ namespace WTAN.SQLServerDAL
     {
         public Boolean DelFriendLink(String id)
         {
-            String sql = @"delete FriendLink 
-                        where autokey in ({0})";//防注入写法
-            String ids = String.Empty;
-            List<String> list = new List<String>();
-            for (int i = 0; i < id.Split(',').Count(); i++)
+            if (id.Equals("del"))
             {
-                ids += (ids.IsNullOrEmpty() ? "" : ",") + String.Format("@id{0}", i);
-                list.Add(String.Format("id{0}", i));
-                list.Add(id.Split(',')[i]);
+                String sql = "delete FriendLink where Enable=0 and webname<>'tancms'";
+                return sql.ExecuteNoneQuery() > 0;
             }
-            sql = String.Format(sql, ids);
-            return sql.ExecuteNoneQuery(list.ToArray()) > 0;
+            else
+            {
+                String sql = @"delete FriendLink 
+                        where autokey in ({0})";//防注入写法
+                String ids = String.Empty;
+                List<String> list = new List<String>();
+                for (int i = 0; i < id.Split(',').Count(); i++)
+                {
+                    ids += (ids.IsNullOrEmpty() ? "" : ",") + String.Format("@id{0}", i);
+                    list.Add(String.Format("id{0}", i));
+                    list.Add(id.Split(',')[i]);
+                }
+                sql = String.Format(sql, ids);
+                return sql.ExecuteNoneQuery(list.ToArray()) > 0;
+            }
         }
 
         public Boolean UpdateFriendLinkState(String id, int state)
@@ -51,6 +59,7 @@ namespace WTAN.SQLServerDAL
                 "LinkUrl",f.LinkUrl,
                 "Note", f.Note,
                 "Enable",f.Enable?"1":"0",
+                "WebName",f.WebName.ToString(),
                 "AutoKey",f.AutoKey.ToString()
             };
             if (f.AutoKey > 0)
@@ -59,15 +68,16 @@ namespace WTAN.SQLServerDAL
                         LinkName=@LinkName,
                         LinkUrl=@LinkUrl, 
                         Note=@Note, 
-                        Enable=@Enable
+                        Enable=@Enable,
+                        WebName=@WebName
                         where autokey=@AutoKey";
                 if (sql.ExecuteNoneQuery(list.ToArray()) > 0)
                     return f.AutoKey;
             }
             else
             {
-                sql = @"insert into FriendLink( LinkName, LinkUrl, Note, CreateTime, Enable) 
-                        values(@LinkName, @LinkUrl, @Note, getdate(), @Enable) 
+                sql = @"insert into FriendLink( LinkName, LinkUrl, Note, CreateTime, Enable,WebName) 
+                        values(@LinkName, @LinkUrl, @Note, getdate(), @Enable,@WebName) 
                         select isnull(SCOPE_IDENTITY(),0) as ID";
                 return sql.ExecuteScalarInt(list.ToArray()).ToInt32Value();
             }

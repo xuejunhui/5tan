@@ -39,6 +39,7 @@
                 <li id="setEnableState0" data-action="VerifyFriendLink" data-value="0"><span><img alt="" src="/content/account/cancelstate.png" /></span>批量取消审核</li>
                 <li onclick='showJumpBox("/Content/EditFriendLink?autokey=0")'><span><img alt="" src="/content/account/t01.png" /></span>新增友链</li>
                 <li id="BulkDelete" data-value="DelFriendLinkInfo"><span><img alt="" src="/content/account/t03.png" /></span>批量刪除</li>
+                <li onclick="deleteBox('/Ajax/DelFriendLinkInfo' , 'del')"><span><img alt="" src="/content/account/t03.png" /></span>刪除未审核</li>
                 @if (!string.IsNullOrEmpty(Model.Keyword) || !string.IsNullOrEmpty(Model.IsEnable))
                 { 
                     <li onclick='showJumpBox("/Content/FriendLink")'><span><img  alt="" src="/content/account/t04.png" /></span>清除查询</li>
